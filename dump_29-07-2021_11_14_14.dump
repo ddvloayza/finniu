@@ -1,0 +1,1775 @@
+--
+-- PostgreSQL database cluster dump
+--
+
+SET default_transaction_read_only = off;
+
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+
+--
+-- Drop databases
+--
+
+DROP DATABASE blog_database;
+
+
+
+
+--
+-- Drop roles
+--
+
+DROP ROLE blog_database;
+DROP ROLE postgres;
+
+
+--
+-- Roles
+--
+
+CREATE ROLE blog_database;
+ALTER ROLE blog_database WITH SUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'md58f8ba9cae6c4e2560b3ae824c27d6b74';
+CREATE ROLE postgres;
+ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS;
+
+
+
+
+
+
+--
+-- Database creation
+--
+
+CREATE DATABASE blog_database WITH TEMPLATE = template0 OWNER = postgres;
+REVOKE CONNECT,TEMPORARY ON DATABASE template1 FROM PUBLIC;
+GRANT CONNECT ON DATABASE template1 TO PUBLIC;
+
+
+\connect blog_database
+
+SET default_transaction_read_only = off;
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.3
+-- Dumped by pg_dump version 10.3
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: blog_database
+--
+
+CREATE TABLE public.auth_group (
+    id integer NOT NULL,
+    name character varying(150) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO blog_database;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: blog_database
+--
+
+CREATE SEQUENCE public.auth_group_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO blog_database;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: blog_database
+--
+
+ALTER SEQUENCE public.auth_group_id_seq OWNED BY public.auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: blog_database
+--
+
+CREATE TABLE public.auth_group_permissions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO blog_database;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: blog_database
+--
+
+CREATE SEQUENCE public.auth_group_permissions_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO blog_database;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: blog_database
+--
+
+ALTER SEQUENCE public.auth_group_permissions_id_seq OWNED BY public.auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: blog_database
+--
+
+CREATE TABLE public.auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO blog_database;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: blog_database
+--
+
+CREATE SEQUENCE public.auth_permission_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO blog_database;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: blog_database
+--
+
+ALTER SEQUENCE public.auth_permission_id_seq OWNED BY public.auth_permission.id;
+
+
+--
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: blog_database
+--
+
+CREATE TABLE public.auth_user (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean NOT NULL,
+    username character varying(150) NOT NULL,
+    first_name character varying(150) NOT NULL,
+    last_name character varying(150) NOT NULL,
+    email character varying(254) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.auth_user OWNER TO blog_database;
+
+--
+-- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: blog_database
+--
+
+CREATE TABLE public.auth_user_groups (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_groups OWNER TO blog_database;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: blog_database
+--
+
+CREATE SEQUENCE public.auth_user_groups_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_groups_id_seq OWNER TO blog_database;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: blog_database
+--
+
+ALTER SEQUENCE public.auth_user_groups_id_seq OWNED BY public.auth_user_groups.id;
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE; Schema: public; Owner: blog_database
+--
+
+CREATE SEQUENCE public.auth_user_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_id_seq OWNER TO blog_database;
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: blog_database
+--
+
+ALTER SEQUENCE public.auth_user_id_seq OWNED BY public.auth_user.id;
+
+
+--
+-- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: blog_database
+--
+
+CREATE TABLE public.auth_user_user_permissions (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_user_permissions OWNER TO blog_database;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: blog_database
+--
+
+CREATE SEQUENCE public.auth_user_user_permissions_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_user_permissions_id_seq OWNER TO blog_database;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: blog_database
+--
+
+ALTER SEQUENCE public.auth_user_user_permissions_id_seq OWNED BY public.auth_user_user_permissions.id;
+
+
+--
+-- Name: blog_blogarticle; Type: TABLE; Schema: public; Owner: blog_database
+--
+
+CREATE TABLE public.blog_blogarticle (
+    id integer NOT NULL,
+    created timestamp with time zone NOT NULL,
+    modified timestamp with time zone NOT NULL,
+    title character varying(128) NOT NULL,
+    slug character varying(128) NOT NULL,
+    video text,
+    highlighting_weight integer NOT NULL,
+    category_id integer,
+    user_id integer,
+    intro text,
+    image_intro character varying(100),
+    quotes text,
+    is_active boolean NOT NULL,
+    CONSTRAINT blog_blogarticle_highlighting_weight_check CHECK ((highlighting_weight >= 0))
+);
+
+
+ALTER TABLE public.blog_blogarticle OWNER TO blog_database;
+
+--
+-- Name: blog_blogarticle_id_seq; Type: SEQUENCE; Schema: public; Owner: blog_database
+--
+
+CREATE SEQUENCE public.blog_blogarticle_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.blog_blogarticle_id_seq OWNER TO blog_database;
+
+--
+-- Name: blog_blogarticle_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: blog_database
+--
+
+ALTER SEQUENCE public.blog_blogarticle_id_seq OWNED BY public.blog_blogarticle.id;
+
+
+--
+-- Name: blog_blogarticle_tags; Type: TABLE; Schema: public; Owner: blog_database
+--
+
+CREATE TABLE public.blog_blogarticle_tags (
+    id integer NOT NULL,
+    blogarticle_id integer NOT NULL,
+    blogtag_id integer NOT NULL
+);
+
+
+ALTER TABLE public.blog_blogarticle_tags OWNER TO blog_database;
+
+--
+-- Name: blog_blogarticle_tags_id_seq; Type: SEQUENCE; Schema: public; Owner: blog_database
+--
+
+CREATE SEQUENCE public.blog_blogarticle_tags_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.blog_blogarticle_tags_id_seq OWNER TO blog_database;
+
+--
+-- Name: blog_blogarticle_tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: blog_database
+--
+
+ALTER SEQUENCE public.blog_blogarticle_tags_id_seq OWNED BY public.blog_blogarticle_tags.id;
+
+
+--
+-- Name: blog_blogtag; Type: TABLE; Schema: public; Owner: blog_database
+--
+
+CREATE TABLE public.blog_blogtag (
+    id integer NOT NULL,
+    created timestamp with time zone NOT NULL,
+    modified timestamp with time zone NOT NULL,
+    name character varying(128) NOT NULL,
+    slug character varying(128) NOT NULL,
+    color integer,
+    user_id integer,
+    CONSTRAINT blog_blogtag_color_check CHECK ((color >= 0))
+);
+
+
+ALTER TABLE public.blog_blogtag OWNER TO blog_database;
+
+--
+-- Name: blog_blogtag_id_seq; Type: SEQUENCE; Schema: public; Owner: blog_database
+--
+
+CREATE SEQUENCE public.blog_blogtag_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.blog_blogtag_id_seq OWNER TO blog_database;
+
+--
+-- Name: blog_blogtag_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: blog_database
+--
+
+ALTER SEQUENCE public.blog_blogtag_id_seq OWNED BY public.blog_blogtag.id;
+
+
+--
+-- Name: blog_categoryarticle; Type: TABLE; Schema: public; Owner: blog_database
+--
+
+CREATE TABLE public.blog_categoryarticle (
+    id integer NOT NULL,
+    created timestamp with time zone NOT NULL,
+    modified timestamp with time zone NOT NULL,
+    title character varying(128) NOT NULL,
+    slug character varying(128) NOT NULL,
+    image character varying(100) NOT NULL,
+    video text,
+    highlighting_weight integer NOT NULL,
+    user_id integer,
+    CONSTRAINT blog_categoryarticle_highlighting_weight_check CHECK ((highlighting_weight >= 0))
+);
+
+
+ALTER TABLE public.blog_categoryarticle OWNER TO blog_database;
+
+--
+-- Name: blog_categoryarticle_id_seq; Type: SEQUENCE; Schema: public; Owner: blog_database
+--
+
+CREATE SEQUENCE public.blog_categoryarticle_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.blog_categoryarticle_id_seq OWNER TO blog_database;
+
+--
+-- Name: blog_categoryarticle_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: blog_database
+--
+
+ALTER SEQUENCE public.blog_categoryarticle_id_seq OWNED BY public.blog_categoryarticle.id;
+
+
+--
+-- Name: blog_configblog; Type: TABLE; Schema: public; Owner: blog_database
+--
+
+CREATE TABLE public.blog_configblog (
+    id integer NOT NULL,
+    created timestamp with time zone NOT NULL,
+    modified timestamp with time zone NOT NULL,
+    name_page character varying(128) NOT NULL,
+    image character varying(100) NOT NULL,
+    content text,
+    user_id integer
+);
+
+
+ALTER TABLE public.blog_configblog OWNER TO blog_database;
+
+--
+-- Name: blog_configblog_id_seq; Type: SEQUENCE; Schema: public; Owner: blog_database
+--
+
+CREATE SEQUENCE public.blog_configblog_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.blog_configblog_id_seq OWNER TO blog_database;
+
+--
+-- Name: blog_configblog_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: blog_database
+--
+
+ALTER SEQUENCE public.blog_configblog_id_seq OWNED BY public.blog_configblog.id;
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: blog_database
+--
+
+CREATE TABLE public.django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id integer NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO blog_database;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: blog_database
+--
+
+CREATE SEQUENCE public.django_admin_log_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO blog_database;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: blog_database
+--
+
+ALTER SEQUENCE public.django_admin_log_id_seq OWNED BY public.django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: blog_database
+--
+
+CREATE TABLE public.django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO blog_database;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: blog_database
+--
+
+CREATE SEQUENCE public.django_content_type_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO blog_database;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: blog_database
+--
+
+ALTER SEQUENCE public.django_content_type_id_seq OWNED BY public.django_content_type.id;
+
+
+--
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: blog_database
+--
+
+CREATE TABLE public.django_migrations (
+    id integer NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_migrations OWNER TO blog_database;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: blog_database
+--
+
+CREATE SEQUENCE public.django_migrations_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_migrations_id_seq OWNER TO blog_database;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: blog_database
+--
+
+ALTER SEQUENCE public.django_migrations_id_seq OWNED BY public.django_migrations.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: blog_database
+--
+
+CREATE TABLE public.django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO blog_database;
+
+--
+-- Name: userprofile_userprofile; Type: TABLE; Schema: public; Owner: blog_database
+--
+
+CREATE TABLE public.userprofile_userprofile (
+    id integer NOT NULL,
+    created timestamp with time zone NOT NULL,
+    modified timestamp with time zone NOT NULL,
+    first_name character varying(128) NOT NULL,
+    last_name character varying(128) NOT NULL,
+    ocupation character varying(128),
+    image character varying(100),
+    slug character varying(128) NOT NULL,
+    facebook_url character varying(200),
+    linkedin_url character varying(200),
+    twitter_url character varying(200),
+    instagram_url character varying(200),
+    user_id integer
+);
+
+
+ALTER TABLE public.userprofile_userprofile OWNER TO blog_database;
+
+--
+-- Name: userprofile_userprofile_id_seq; Type: SEQUENCE; Schema: public; Owner: blog_database
+--
+
+CREATE SEQUENCE public.userprofile_userprofile_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.userprofile_userprofile_id_seq OWNER TO blog_database;
+
+--
+-- Name: userprofile_userprofile_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: blog_database
+--
+
+ALTER SEQUENCE public.userprofile_userprofile_id_seq OWNED BY public.userprofile_userprofile.id;
+
+
+--
+-- Name: auth_group id; Type: DEFAULT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.auth_group ALTER COLUMN id SET DEFAULT nextval('public.auth_group_id_seq'::regclass);
+
+
+--
+-- Name: auth_group_permissions id; Type: DEFAULT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: auth_permission id; Type: DEFAULT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.auth_permission ALTER COLUMN id SET DEFAULT nextval('public.auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: auth_user id; Type: DEFAULT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.auth_user ALTER COLUMN id SET DEFAULT nextval('public.auth_user_id_seq'::regclass);
+
+
+--
+-- Name: auth_user_groups id; Type: DEFAULT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.auth_user_groups ALTER COLUMN id SET DEFAULT nextval('public.auth_user_groups_id_seq'::regclass);
+
+
+--
+-- Name: auth_user_user_permissions id; Type: DEFAULT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- Name: blog_blogarticle id; Type: DEFAULT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.blog_blogarticle ALTER COLUMN id SET DEFAULT nextval('public.blog_blogarticle_id_seq'::regclass);
+
+
+--
+-- Name: blog_blogarticle_tags id; Type: DEFAULT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.blog_blogarticle_tags ALTER COLUMN id SET DEFAULT nextval('public.blog_blogarticle_tags_id_seq'::regclass);
+
+
+--
+-- Name: blog_blogtag id; Type: DEFAULT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.blog_blogtag ALTER COLUMN id SET DEFAULT nextval('public.blog_blogtag_id_seq'::regclass);
+
+
+--
+-- Name: blog_categoryarticle id; Type: DEFAULT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.blog_categoryarticle ALTER COLUMN id SET DEFAULT nextval('public.blog_categoryarticle_id_seq'::regclass);
+
+
+--
+-- Name: blog_configblog id; Type: DEFAULT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.blog_configblog ALTER COLUMN id SET DEFAULT nextval('public.blog_configblog_id_seq'::regclass);
+
+
+--
+-- Name: django_admin_log id; Type: DEFAULT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.django_admin_log ALTER COLUMN id SET DEFAULT nextval('public.django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: django_content_type id; Type: DEFAULT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.django_content_type ALTER COLUMN id SET DEFAULT nextval('public.django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: django_migrations id; Type: DEFAULT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.django_migrations ALTER COLUMN id SET DEFAULT nextval('public.django_migrations_id_seq'::regclass);
+
+
+--
+-- Name: userprofile_userprofile id; Type: DEFAULT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.userprofile_userprofile ALTER COLUMN id SET DEFAULT nextval('public.userprofile_userprofile_id_seq'::regclass);
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: blog_database
+--
+
+COPY public.auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: blog_database
+--
+
+COPY public.auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: blog_database
+--
+
+COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can view log entry	1	view_logentry
+5	Can add permission	2	add_permission
+6	Can change permission	2	change_permission
+7	Can delete permission	2	delete_permission
+8	Can view permission	2	view_permission
+9	Can add group	3	add_group
+10	Can change group	3	change_group
+11	Can delete group	3	delete_group
+12	Can view group	3	view_group
+13	Can add user	4	add_user
+14	Can change user	4	change_user
+15	Can delete user	4	delete_user
+16	Can view user	4	view_user
+17	Can add content type	5	add_contenttype
+18	Can change content type	5	change_contenttype
+19	Can delete content type	5	delete_contenttype
+20	Can view content type	5	view_contenttype
+21	Can add session	6	add_session
+22	Can change session	6	change_session
+23	Can delete session	6	delete_session
+24	Can view session	6	view_session
+25	Can add Blog configuracion	7	add_configblog
+26	Can change Blog configuracion	7	change_configblog
+27	Can delete Blog configuracion	7	delete_configblog
+28	Can view Blog configuracion	7	view_configblog
+29	Can add Categoria	8	add_categoryarticle
+30	Can change Categoria	8	change_categoryarticle
+31	Can delete Categoria	8	delete_categoryarticle
+32	Can view Categoria	8	view_categoryarticle
+33	Can add Etiqueta de articulo	9	add_blogtag
+34	Can change Etiqueta de articulo	9	change_blogtag
+35	Can delete Etiqueta de articulo	9	delete_blogtag
+36	Can view Etiqueta de articulo	9	view_blogtag
+37	Can add Artículo	10	add_blogarticle
+38	Can change Artículo	10	change_blogarticle
+39	Can delete Artículo	10	delete_blogarticle
+40	Can view Artículo	10	view_blogarticle
+41	Can add Perfil del Usuario	11	add_userprofile
+42	Can change Perfil del Usuario	11	change_userprofile
+43	Can delete Perfil del Usuario	11	delete_userprofile
+44	Can view Perfil del Usuario	11	view_userprofile
+\.
+
+
+--
+-- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: blog_database
+--
+
+COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
+1	pbkdf2_sha256$180000$KqzUt03tMEUR$+EY6Bi02xemKQeA6WNds+6jQ87plh2iEi/77RCSyPZ8=	2021-07-25 22:35:43.180768+00	t	admin	Diego	De la vega Loayza	admin@admin.com	t	t	2021-06-26 18:25:41+00
+\.
+
+
+--
+-- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: public; Owner: blog_database
+--
+
+COPY public.auth_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: blog_database
+--
+
+COPY public.auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: blog_blogarticle; Type: TABLE DATA; Schema: public; Owner: blog_database
+--
+
+COPY public.blog_blogarticle (id, created, modified, title, slug, video, highlighting_weight, category_id, user_id, intro, image_intro, quotes, is_active) FROM stdin;
+1	2021-06-26 19:26:28.718087+00	2021-06-26 19:30:08.039138+00	Docker Error: Returned a Non-zero Code: 137	docker-error-returned-non-zero-code-137		100	1	1	<section class="post-content">\r\n<p>While running a node app with Docker, there is an error 137:</p>\r\n<div class="highlighter-rouge">\r\n<div class="highlight">\r\n<pre class="highlight"><code>The command '/bin/sh -c npm install' returned a non-zero code: 137\r\n</code></pre>\r\n</div>\r\n</div>\r\n<p>This means a<span>&nbsp;</span><a href="https://github.com/mitchellh/vagrant/issues/4247" target="_blank" rel="noopener">out of memory error</a>.</p>\r\n<p>To fix, you can add more RAM.</p>\r\n<p>Or you can add more swap memory (FREE!). Swap memory uses part of your harddisk for temporary memory.</p>\r\n<p>These steps are exactly the same from a<span>&nbsp;</span><a href="https://samwize.com/2014/06/10/cannot-restart-mysql-for-digital-ocean-server-low-memory/">previous guide</a>:</p>\r\n<div class="language-bash highlighter-rouge">\r\n<div class="highlight">\r\n<pre class="highlight"><code><span class="c"># Confirm you have no swap</span>\r\n<span class="nb">sudo </span>swapon <span class="nt">-s</span>\r\n\r\n<span class="c"># Allocate 1GB (or more if you wish) in /swapfile</span>\r\n<span class="nb">sudo </span>fallocate <span class="nt">-l</span> 1G /swapfile\r\n\r\n<span class="c"># Make it secure</span>\r\n<span class="nb">sudo chmod </span>600 /swapfile\r\n<span class="nb">ls</span> <span class="nt">-lh</span> /swapfile\r\n\r\n<span class="c"># Activate it</span>\r\n<span class="nb">sudo </span>mkswap /swapfile\r\n<span class="nb">sudo </span>swapon /swapfile\r\n\r\n<span class="c"># Confirm again there's indeed more memory now</span>\r\nfree <span class="nt">-m</span>\r\n<span class="nb">sudo </span>swapon <span class="nt">-s</span>\r\n\r\n<span class="c"># Configure fstab to use swap when instance restart</span>\r\n<span class="nb">sudo </span>nano /etc/fstab\r\n\r\n<span class="c"># Add this line to /etc/fstab, save and exit</span>\r\n/swapfile   none    swap    sw    0   0\r\n\r\n<span class="c"># Change swappiness to 10, so that swap is used only when 10% RAM is unused</span>\r\n<span class="c"># The default is too high at 60</span>\r\n<span class="nb">echo </span>10 | <span class="nb">sudo tee</span> /proc/sys/vm/swappiness\r\n<span class="nb">echo </span>vm.swappiness <span class="o">=</span> 10 | <span class="nb">sudo tee</span> <span class="nt">-a</span> /etc/sysctl.conf\r\n</code></pre>\r\n</div>\r\n</div>\r\n</section>	blog-images/intro/x5qc7fcydza4gzjjyq7d.png		t
+2	2021-06-26 19:36:23.6697+00	2021-06-27 20:00:03.762015+00	DUMP / RESTORE PostgreSQL Kubernetes	dump-restore-postgresql-kubernetes		100	2	1	<h1>Como hacer un Dump y un Restore en Kubernetes</h1>\r\n<h2><strong>Dump</strong></h2>\r\n<h3>Requisitos en variables:</h3>\r\n<p>pod-name = nombre del postgres pod</p>\r\n<p>postgres-user = Usuario de la BD (si has hecho todo por defecto seria postgres)</p>\r\n<p>database-name = Nombre de la BD</p>\r\n<p>Luego de tener todos las variables , procedemos a ejecutar el comando dentro de tu proxy de kubernetes</p>\r\n<pre>kubectl exec [pod-name] -- bash -c "pg_dump -U [postgres-user] [database-name]" &gt; database.sql</pre>\r\n<h2>RESTORE</h2>\r\n<h3>Requisitos en variables:</h3>\r\n<p>pod-name = nombre del postgres pod</p>\r\n<p>postgres-user = Usuario de la BD (si has hecho todo por defecto seria postgres)</p>\r\n<p>database-name = Nombre de la BD</p>\r\n<p>Luego de tener estas variables , ejecutamos el siguiente comando :</p>\r\n<p>cat database.sql | kubectl exec -i [pod-name] -- psql -U [postgres-user] -d [database-name]</p>\r\n<p>Nota&nbsp;</p>\r\n<p>Todos estos comandos son ejecutados deste tu proxy de kubernetes</p>	blog-images/intro/kub.jpeg		t
+8	2021-07-25 22:42:13.176686+00	2021-07-25 23:04:08.782289+00	Que es lo que hace On_delete en los Modelos Django	que-es-lo-que-hace-on_delete-en-los-modelos-django		100	3	1	<p>Muchas personas se toparon con esta mejora en la version de Django 2.0, pero nos surgieron bastantes interrogantes:</p>\r\n<p><span>&iquest;Qu&eacute; hace on_delete?&nbsp;</span></p>\r\n<p><span>&iquest;Qu&eacute; hace&nbsp;</span><code>models.CASCADE</code><span>?&nbsp;</span></p>\r\n<p><span>&iquest;Qu&eacute; otras opciones hay disponibles </span><span>?</span></p>\r\n<p><span>&iquest;D&oacute;nde reside la documentaci&oacute;n para esto?</span></p>\r\n<pre class="language-python"><code>from django.db import models\r\n\r\nclass Car(models.Model):\r\n    manufacturer = models.ForeignKey(\r\n        'Manufacturer',\r\n        on_delete=models.CASCADE,\r\n    )\r\n    # ...\r\n\r\nclass Manufacturer(models.Model):\r\n    # ...\r\n    pass</code></pre>\r\n<p><span>Este es el comportamiento a adoptar cuando&nbsp;se elimina el objeto&nbsp;</span><em><span>referenciado</span></em><span>&nbsp;.&nbsp;No es espec&iacute;fico de Django;&nbsp;este es un est&aacute;ndar SQL.&nbsp;Aunque Django tiene su propia implementaci&oacute;n sobre SQL.</span></p>\r\n<p><span>Hay siete acciones posibles a tomar cuando ocurre tal evento:</span></p>\r\n<ul>\r\n<li><code>CASCADE</code><span>: Cuando se elimina el objeto al que se hace referencia, tambi&eacute;n elimine los objetos que tienen referencias a &eacute;l (cuando elimina una publicaci&oacute;n de blog, por ejemplo, es posible que desee eliminar tambi&eacute;n los comentarios).&nbsp;Equivalente SQL:&nbsp;</span><code>CASCADE</code><span>.</span></li>\r\n<li><code>PROTECT</code><span>: Prohibir la eliminaci&oacute;n del objeto referenciado.&nbsp;Para eliminarlo, tendr&aacute; que eliminar todos los objetos que hacen referencia a &eacute;l manualmente.&nbsp;Equivalente SQL:&nbsp;</span><code>RESTRICT</code><span>.</span></li>\r\n<li><code>RESTRICT</code><span>:&nbsp;</span><em><span>(introducido en Django 3.1)</span></em><span>&nbsp;Comportamiento similar al&nbsp;</span><code>PROTECT</code><span>que coincide con SQL con&nbsp;</span><code>RESTRICT</code><span>mayor precisi&oacute;n.&nbsp;(Ver&nbsp;</span><a href="https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.RESTRICT" rel="noreferrer"><span>ejemplo de documentaci&oacute;n de django</span></a><span>&nbsp;)</span></li>\r\n<li><code>SET_NULL</code><span>: Establezca la referencia en NULL (requiere que el campo sea anulable).&nbsp;Por ejemplo, cuando elimina un usuario, es posible que desee mantener los comentarios que public&oacute; en las publicaciones del blog, pero digamos que fue publicado por un usuario an&oacute;nimo (o eliminado).&nbsp;Equivalente SQL:&nbsp;</span><code>SET NULL</code><span>.</span></li>\r\n<li><code>SET_DEFAULT</code><span>: Establece el valor predeterminado.&nbsp;Equivalente SQL:&nbsp;</span><code>SET DEFAULT</code><span>.</span></li>\r\n<li><code>SET(...)</code><span>: Establece un valor dado.&nbsp;Este no es parte del est&aacute;ndar SQL y est&aacute; completamente manejado por Django.</span></li>\r\n<li><code>DO_NOTHING</code><span>: Probablemente una muy mala idea ya que esto crear&iacute;a problemas de integridad en su base de datos (haciendo referencia a un objeto que en realidad no existe).&nbsp;Equivalente SQL:&nbsp;</span><code>NO ACTION</code><span>.&nbsp;</span><strong><span>(2)</span></strong></li>\r\n</ul>\r\n<p></p>	blog-images/intro/Django-Web-development-icon-1024x600.jpeg		t
+3	2021-07-10 21:39:59.947774+00	2021-07-10 21:55:35.40278+00	Que es Django?	que-es-django		100	3	1	<p><span>Django (llamado as&iacute; por Django Reinhardt) es un marco web de c&oacute;digo abierto y gratuito basado en Python de alto nivel que sigue el patr&oacute;n arquitect&oacute;nico modelo-vista-plantilla (MVT).&nbsp;A partir de ahora, el marco lo mantiene Django Software Foundation (DSF), una organizaci&oacute;n independiente con sede en los EE. UU. Y establecida como una no-beneficio 501.</span></p>\r\n<p><span>Fue creado en el oto&ntilde;o de 2003 cuando los programadores web del peri&oacute;dico Lawrence Journal-World, Adrian Holovaty y Simon Willson.&nbsp;Comenz&oacute; a usar Python para crear aplicaciones.&nbsp;Dos a&ntilde;os m&aacute;s tarde, en julio de 2005, fue lanzado al p&uacute;blico bajo una licencia BSD.&nbsp;M&aacute;s tarde, en junio de 2008, la incipiente Django Software Foundation (DSF) se hizo cargo del desarrollo de Django.</span></p>\r\n<h4><span><strong>Lista de empresas populares que utilizan Django&nbsp;</strong></span></h4>\r\n<ul>\r\n<li><span>PB</span></li>\r\n<li><span>Instagram</span></li>\r\n<li><span>Mozilla</span></li>\r\n<li><span>The Washington Times</span></li>\r\n<li><span>Disqus, Bitbucket</span></li>\r\n<li><span>NextDoor</span></li>\r\n</ul>\r\n<p></p>\r\n<h4><strong><span>Ventajas de usar Django:</span></strong></h4>\r\n<ul>\r\n<li><u><span>Rich Ecosystem</span></u><span>&nbsp;: viene con numerosas aplicaciones de terceros que se pueden integrar f&aacute;cilmente seg&uacute;n los requisitos del proyecto.</span><span></span></li>\r\n<li><u><span>Madurez</span></u><span>&nbsp;: Django se ha utilizado durante m&aacute;s de una d&eacute;cada.&nbsp;En el marco de tiempo, se agregan y mejoran muchas caracter&iacute;sticas para convertirlo en un marco robusto.&nbsp;Aparte de eso, hay una gran cantidad de desarrolladores que est&aacute;n usando Django.</span></li>\r\n<li><u><span>Panel de administraci&oacute;n</span></u><span>&nbsp;: Django proporciona un panel de administraci&oacute;n que podemos usar para realizar operaciones CRUD b&aacute;sicas sobre los modelos.</span></li>\r\n<li><u><span>Complementos</span></u><span>&nbsp;: permite a los programadores agregar varias funciones a las aplicaciones y dejar suficiente espacio para la personalizaci&oacute;n.</span></li>\r\n<li><u><span>Bibliotecas</span></u><span>&nbsp;: debido a la gran comunidad de desarrollo, hay una gran cantidad de bibliotecas para cada tarea.</span></li>\r\n<li><u><span>ORM</span></u><span>&nbsp;: Nos ayuda a trabajar con datos de una manera m&aacute;s orientada a objetos.</span></li>\r\n</ul>	blog-images/intro/1_25Le7KoMK_z6BIaM8x74RA.png		t
+4	2021-07-10 22:02:59.041199+00	2021-07-13 08:46:17.483365+00	Preguntas básicas de la entrevista de Django parte 1	preguntas-basicas-de-la-entrevista-de-django-parte-1		100	3	1	<h3><span>1. &iquest;Explica la arquitectura de Django?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>Django sigue el patr&oacute;n MVT (Model View Template) que se basa en la arquitectura Model View Controller.&nbsp;Es ligeramente diferente del patr&oacute;n MVC, ya que mantiene sus propias convenciones, por lo que el controlador lo maneja el marco en s&iacute;.&nbsp;La plantilla es una capa de presentaci&oacute;n.&nbsp;Es un archivo HTML mezclado con Django Template Language (DTL).&nbsp;El desarrollador proporciona el modelo, la vista y la plantilla, luego lo asigna a una URL y, finalmente, Django se lo entrega al usuario.</span></p>\r\n<p><span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA4QAAAFzCAYAAABmRsezAAAgAElEQVR4XuzdBXiVZR8G8PusO9nGGN3dnVIqCiIdFuFnYKKALRaCgYotJnYgoYgBKt3dPQeMWHed+q7/O852zs5ZwTmHE/d7XVzA9sbz/J53sHtPqfR6vR48KEABClCAAhSgAAUoQAEKUMDtBFQMhG7X5qwwBShAAQpQgAIUoAAFKEABRYCBkC8CBShAAQpQgAIUoAAFKEABNxVgIHTThme1KUABClCAAhSgAAUoQAEKMBDyHaAABShAAQpQgAIUoAAFKOCmAgyEbtrwrDYFKEABClCAAhSgAAUoQAEGQr4DFKAABShAAQpQgAIUoAAF3FSAgdBNG57VpgAFKEABClCAAhSgAAUowEDId4ACFKAABShAAQpQgAIUoICbCjAQumnDs9oUoAAFKEABClCAAhSgAAUYCPkOUIACFKAABShAAQpQgAIUcFMBBkI3bXhWmwIUoAAFKEABClCAAhSgAAMh3wEKUIACFKAABShAAQpQgAJuKsBA6KYNz2pTgAIUoAAFKEABClCAAhRgIOQ7QAEKUIACFKAABShAAQpQwE0FGAjdtOFZbQpQgAIUoAAFKEABClCAAgyEfAcoQAEKUIACFKAABShAAQq4qQADoZs2PKtNAQpQgAIUoAAFKEABClCAgZDvAAUoQAEKUIACFKAABShAATcVYCB004ZntSlAAQpQgAIUoAAFKEABCjAQ8h2gAAUoQAEKUIACFKAABSjgpgIMhG7a8Kw2BShAAQpQgAIUoAAFKEABBkK+AxSgAAUoQAEKUIACFKAABdxUgIHQTRue1aYABShAAQpQgAIUoAAFKMBAyHeAAhSgAAUoQAEKUIACFKCAmwowELppw7PaFKAABShAAQpQgAIUoAAFGAj5DlCAAhSgAAUoQAEKUIACFHBTAQZCN214VpsCFKAABShAAQpQgAIUoAADId8BClCAAhSgAAUoQAEKUIACbirAQOimDc9qU4ACFKAABShAAQpQgAIUYCDkO0ABClCAAhSgAAUoQAEKUMBNBRgI3bThWW0KUIACFKAABShAAQpQgAIMhHwHKEABClCAAhSgAAUoQAEKuKkAA6GbNjyrTQEKUIACFKAABShAAQpQgIGQ7wAFKEABClCAAhSgAAUoQAE3FWAgdNOGZ7UpQAEKUIACFKAABShAAQowEPIdoAAFKEABClCAAhSgAAUo4KYCDIRu2vCsNgUoQAEKUIACFKAABShAAQZCvgMUoAAFKEABClCAAhSgAAXcVICB0E0bntWmAAUoQAEKUIACFKAABSjAQMh3gAIUoAAFKEABClCAAhSggJsKMBC6acOz2hSgAAUoQAEKUIACFKAABRgI+Q5QgAIUoAAFKEABClCAAhRwUwEGQjdteFabAhSgAAUoQAEKUIACFKAAAyHfAQpQgAIUoAAFKEABClCAAm4qwEDopg3PalOAAhSgAAUoQAEKUIACFGAg5DtAAQpQgAIUoAAFKEABClDATQUYCN204VltClCAAhSgAAUoQAEKUIACDIR8ByhAAQpQgAIUoAAFKEABCripAAOhmzY8q00BClCAAhSgAAUoQAEKUICBkO8ABShAAQpQgAIUoAAFKEABNxVgIHTThme1KUABClCAAhSgAAUoQAEKMBDyHaAABShAAQpQgAIUoAAFKOCmAgyEbtrwrDYFKEABClCAAhSgAAUoQAEGQr4DFKAABShAAQpQgAIUoAAF3FSAgdBNG57VpgAFKEABClCAAhSgAAUowEDId4ACFKAABShAAQpQgAIUoICbCjAQumnDs9oUoAAFKEABClCAAhSgAAUYCPkOUIACFKAABShAAQpQgAIUcFMBBkI3bXhWmwIUoAAFKEABClCAAhSgAAMh3wEKUIACFKAABShAAQpQgAJuKsBA6KYNz2pTgAIUoAAFKEABClCAAhRgIOQ7QAEKUIACFKAABShAAQpQwE0FGAjdtOFZbQpQgAIUoAAFKEABClCAAgyEfAcoQAEKUIACFKAABShAAQq4qQADoZs2PKtNAQpQgAIUoAAFKEABClCAgZDvAAUoQAEKUIACFKAABShAATcVYCB004ZntSlAAQpQgAIUoAAFKEABCjAQ8h2gAAUoQAEKUIACFKAABSjgpgIMhG7a8Kw2BShAAQpQgAIUoAAFKEABBkK+AxSgAAUoQAEKUIACFKAABdxUgIHQTRue1aYABShAAQpQgAIUoAAFKMBAyHeAAhSgAAUoQAEKUIACFKCAmwowELppw7PaFKAABShAAQpQgAIUoAAFGAj5DlCAAhSgAAUoQAEKUIACFHBTAQZCN214VpsCFKAABShAAQpQwPEFijQ5OJH0L86k7URaTjzy1BnQ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" width="900" height="371" style="display: block; margin-left: auto; margin-right: auto;" /></span></p>\r\n<h3><span>2. &iquest;Explica la estructura de directorios del proyecto django?</span></h3>\r\n<article class="ibpage-article">\r\n<ul>\r\n<li><span>manage.py: una utilidad de l&iacute;nea de comandos que le permite interactuar con su proyecto Django</span></li>\r\n<li><span>__init__.py: un archivo vac&iacute;o que le dice a Python que el directorio actual debe considerarse como un paquete de Python</span></li>\r\n<li><span>settings.py: incluye las configuraciones del proyecto actual, como conexiones de base de datos.</span></li>\r\n<li><span>urls.py: todas las URL del proyecto est&aacute;n presentes aqu&iacute;</span></li>\r\n<li><span>wsgi.py: este es un punto de entrada para su aplicaci&oacute;n que es utilizado por los servidores web para servir el proyecto que ha creado.</span></li>\r\n</ul>\r\n<h3><span>3. &iquest;Qu&eacute; son los modelos en Django?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>Un modelo en Django se refiere a una clase que se asigna a una tabla de base de datos o colecci&oacute;n de base de datos.&nbsp;Cada atributo de la clase de modelo Django representa un campo de base de datos.&nbsp;Est&aacute;n definidos en app / models.py</span></p>\r\n<p><span>Ejemplo:&nbsp;</span></p>\r\n<pre><code class="language-python hljs"><span class="hljs-keyword">from</span> django.db <span class="hljs-keyword">import</span> models\r\n<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SampleModel</span>(<span class="hljs-params">models.Model</span>):</span>\r\nfield1 = models.CharField(max_length = <span class="hljs-number">50</span>)<span></span>\r\nfield2 = models.IntegerField()<span></span>\r\n<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Meta</span>:</span>\r\ndb_table = &ldquo;sample_model&rdquo;</code></pre>\r\n<p><span>Cada modelo hereda de django.db.models.Model</span><br /><br /><span>Nuestro ejemplo tiene 2 atributos (1 char y 1 campo entero), esos estar&aacute;n en los campos de la tabla.</span></p>\r\n<p><span>La metaclase le ayuda a establecer cosas como permisos disponibles, versiones en singular y plural del nombre, nombre de la tabla de la base de datos asociada, si el modelo es abstracto o no, etc.</span><br /><br /><span>Para obtener m&aacute;s informaci&oacute;n sobre los modelos, puede consultar aqu&iacute;:&nbsp;</span><a href="https://docs.djangoproject.com/en/3.1/topics/db/models/" rel="noopener noreferrer" target="_blank"><u><span>https: // docs. djangoproject.com/en/3.1/topics/db/models/</span></u></a><u><span>&nbsp;.</span></u></p>\r\n<section id="django-template">\r\n<h3><span>4. &iquest;Qu&eacute; son las plantillas en el lenguaje de plantillas Django o Django?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>Las plantillas son una parte integral de la arquitectura de Django MVT.&nbsp;Por lo general, comprenden HTML, CSS y js en los que se incrustan variables din&aacute;micas e informaci&oacute;n con la ayuda de vistas.&nbsp;Algunas construcciones son reconocidas e interpretadas por el motor de plantillas.&nbsp;Los principales son variables y etiquetas.</span></p>\r\n<p><span>Una plantilla se representa con un contexto.&nbsp;La renderizaci&oacute;n simplemente reemplaza las variables con sus valores, presentes en el contexto, y procesa las etiquetas.&nbsp;Todo lo dem&aacute;s permanece como est&aacute;.</span></p>\r\n<p><span>La sintaxis del lenguaje de plantillas de Django incluye las siguientes cuatro construcciones:</span></p>\r\n<ul>\r\n<li><span>Variables</span></li>\r\n<li><span>Etiquetas</span></li>\r\n<li><span>Filtros</span></li>\r\n<li><span>Comentarios</span></li>\r\n</ul>\r\n<p><span>Para leer m&aacute;s sobre las plantillas, puede consultar esto:&nbsp;</span><a href="https://docs.djangoproject.com/en/3.1/topics/templates/" rel="noopener noreferrer" target="_blank"><span>https://docs.djangoproject.com/en/3.1/topics/templates/</span></a></p>\r\n</article>\r\n</section>\r\n<section id="django-views">\r\n<h3><span>5. &iquest;Qu&eacute; son las vistas en Django?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>Una funci&oacute;n de vista, o "vista" para abreviar, es simplemente una funci&oacute;n de Python que toma una solicitud web y devuelve una respuesta web.&nbsp;Esta respuesta puede ser contenido HTML de una p&aacute;gina web, una redirecci&oacute;n, un error 404, un documento XML, una imagen, etc.&nbsp;</span></p>\r\n<p><span>Ejemplo:</span></p>\r\n<pre><code class="language-python hljs"><span class="hljs-keyword">from</span> django.http <span class="hljs-keyword">import</span> HttpResponse\r\n<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sample_function</span>(<span class="hljs-params">request</span>):</span>\r\n <span class="hljs-keyword">return</span> HttpResponse(&ldquo;Welcome to Django&rdquo;)</code></pre>\r\n<p><span>Hay dos tipos de vistas:</span></p>\r\n<ul>\r\n<li><strong><span>Vistas basadas en funciones:</span></strong><span>&nbsp;en esto, importamos nuestra vista como una funci&oacute;n.</span></li>\r\n<li><strong><span>Vistas basadas en clases</span></strong><span>&nbsp;: es un enfoque orientado a objetos.</span></li>\r\n</ul>\r\n</article>\r\n</section>\r\n<section id="django-orm">\r\n<h3><span>6. &iquest;Qu&eacute; es Django ORM?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>Este ORM (un acr&oacute;nimo de Object Relational Mapper) nos permite interactuar con bases de datos de una manera m&aacute;s pit&oacute;nica, ya que podemos evitar escribir consultas en bruto, es posible recuperar, guardar, eliminar y realizar otras operaciones en la base de datos sin tener que escribir ning&uacute;n SQL. consulta.&nbsp;Funciona como una capa de abstracci&oacute;n entre los modelos y la base de datos.</span></p>\r\n</article>\r\n</section>\r\n<section id="static-file-uses">\r\n<h3><span>7. &iquest;Define archivos est&aacute;ticos y explica sus usos?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>Los sitios web generalmente necesitan entregar archivos adicionales como im&aacute;genes.&nbsp;Javascript o CSS.&nbsp;En Django, estos archivos se denominan "archivos est&aacute;ticos", adem&aacute;s de que Django proporciona&nbsp;</span><code>django.contrib.staticfiles</code><span>para administrar estos archivos est&aacute;ticos.</span></p>\r\n</article>\r\n</section>\r\n<section id="django-rest-framework">\r\n<h3><span>8. &iquest;Qu&eacute; es Django Rest Framework (DRF)?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>Django Rest Framework es un marco de c&oacute;digo abierto basado en Django que le permite crear API RESTful r&aacute;pidamente.</span></p>\r\n</article>\r\n</section>\r\n</article>\r\n</article>\r\n</article>	blog-images/intro/1_25Le7KoMK_z6BIaM8x74RA_RiLNJ6s.png		t
+5	2021-07-13 08:43:13.661655+00	2021-07-13 08:46:21.990843+00	Preguntas básicas de la entrevista de Django parte 2	preguntas-basicas-de-la-entrevista-de-django-parte-2		100	3	1	<div id="django-basic-questions">\r\n<section id="django-admin">\r\n<h3><span>9. &iquest;Qu&eacute; es django-admin y manage.py y explica sus comandos?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>django-admin es la utilidad de l&iacute;nea de comandos de Django para tareas administrativas.&nbsp;Adem&aacute;s de esto, tambi&eacute;n se crea autom&aacute;ticamente un archivo manage.py en cada proyecto de Django.&nbsp;No solo realiza el mismo prop&oacute;sito que django-admin, sino que tambi&eacute;n establece la&nbsp;</span><code>DJANGO_SETTINGS_MODULE</code><span>variable de entorno para que apunte al archivo settings.py del proyecto.</span></p>\r\n<ul>\r\n<li><u><span>Ayuda de django-admin</span></u><span>&nbsp;: se utiliza para mostrar informaci&oacute;n de uso y una lista de los comandos proporcionados por cada aplicaci&oacute;n.</span></li>\r\n<li><u><span>Versi&oacute;n de django-admin</span></u><span>&nbsp;: se utiliza para verificar su versi&oacute;n de Django.</span></li>\r\n<li><u><span>Comprobaci&oacute;n de django-admin</span></u><span>&nbsp;: se utiliza para inspeccionar todo el proyecto Django en busca de problemas comunes.</span></li>\r\n<li><u><span>django-admin compilemessages</span></u><span>&nbsp;: compila archivos .po creados por makemessages en archivos .mo para su uso con la ayuda del soporte integrado de gettext.</span></li>\r\n<li><u><span>django-admin createcachetable</span></u><span>&nbsp;: crea las tablas de cach&eacute; para usar en el backend de la cach&eacute; de la base de datos.</span></li>\r\n<li><u><span>django-admin dbshell</span></u><span>&nbsp;: ejecuta el cliente de l&iacute;nea de comandos para el motor de base de datos especificado en la (s) configuraci&oacute;n (es) de ENGINE, con los par&aacute;metros de conexi&oacute;n (USER, PASSWORD, DB_NAME, USER, etc.) archivo de configuraci&oacute;n especificado</span></li>\r\n<li><u><span>django-admin diffsettings</span></u><span>&nbsp;: muestra la diferencia entre el archivo de configuraci&oacute;n existente y la configuraci&oacute;n predeterminada de Django.</span></li>\r\n<li><u><span>django-admin dumpdata</span></u><span>&nbsp;: se utiliza para el volcado de datos de la base de datos.</span></li>\r\n<li><u><span>django-admin flush</span></u><span>&nbsp;: elimina todos los valores de la base de datos y tambi&eacute;n vuelve a ejecutar cualquier controlador posterior a la sincronizaci&oacute;n especificado en el c&oacute;digo.</span></li>\r\n<li><u><span>django-admin inspectdb</span></u><span>&nbsp;: genera modelos django a partir de las tablas de la base de datos existente.</span></li>\r\n<li><u><span>django-admin loaddata</span></u><span>&nbsp;: carga los datos en la base de datos desde el archivo de instalaci&oacute;n.</span></li>\r\n<li><u><span>django-admin makemessages</span></u><span>&nbsp;: se usa con fines de traducci&oacute;n y tambi&eacute;n genera un archivo de mensaje.</span></li>\r\n<li><u><span>django-admin makemigrations</span></u><span>&nbsp;: genera nuevas migraciones seg&uacute;n los cambios detectados en sus modelos.</span></li>\r\n<li><u><span>django-admin migrate</span></u><span>&nbsp;: ejecuta comandos SQL despu&eacute;s de los cuales se sincroniza el estado de la base de datos con el conjunto actual de modelos y migraciones.</span></li>\r\n<li><u><span>django-admin runserver</span></u><span>&nbsp;: inicia un servidor web ligero en la m&aacute;quina local para el desarrollo.&nbsp;El servidor predeterminado se ejecuta en el puerto 8000 en la direcci&oacute;n IP 127.0.0.1.&nbsp;Puede pasar una direcci&oacute;n IP personalizada y un n&uacute;mero de puerto expl&iacute;citamente si lo desea.</span></li>\r\n<li><u><span>django-admin sendtestemail</span></u><span>&nbsp;: se usa para confirmar que el env&iacute;o de correo electr&oacute;nico a trav&eacute;s de Django est&aacute; funcionando enviando un correo electr&oacute;nico de prueba a los destinatarios especificados.</span></li>\r\n<li><u><span>Shell django-admin</span></u><span>&nbsp;: inicia el int&eacute;rprete interactivo de Python.</span></li>\r\n<li><u><span>django-admin showmigrations</span></u><span>&nbsp;: muestra todas las migraciones presentes en el proyecto.</span></li>\r\n<li><u><span>django-admin sqlflush</span></u><span>&nbsp;: imprime las declaraciones SQL que se ejecutar&iacute;an para el comando flush mencionado anteriormente.</span></li>\r\n<li><u><span>django-admin sqlmigrate</span></u><span>&nbsp;: imprime la declaraci&oacute;n SQL para la migraci&oacute;n nombrada.</span></li>\r\n<li><u><span>django-admin sqlsequencereset</span></u><span>&nbsp;:&nbsp;<u>genera</u>&nbsp;las consultas SQL para restablecer las secuencias para los nombres de aplicaciones dados.</span></li>\r\n<li><u><span>django-admin squashmigrations</span></u><span>&nbsp;:&nbsp;<u>aplasta</u>&nbsp;una variedad de migraciones para una etiqueta de aplicaci&oacute;n en particular.</span></li>\r\n<li><u><span>django-admin startapp</span></u><span>&nbsp;: crea una nueva aplicaci&oacute;n Django para el nombre de la aplicaci&oacute;n dada dentro del directorio actual o en el destino dado.</span></li>\r\n<li><u><span>django-admin startproject</span></u><span>&nbsp;: crea una nueva estructura de directorio del proyecto Django para el nombre del proyecto dado dentro del directorio actual o en el destino dado.</span></li>\r\n<li><u><span>prueba django-admin</span></u><span>&nbsp;: ejecuta pruebas para todas las aplicaciones instaladas.</span></li>\r\n<li><u><span>django-admin testserver</span></u><span>&nbsp;: ejecuta un servidor de desarrollo Django (que tambi&eacute;n se ejecuta a trav&eacute;s del comando runserver) utilizando datos de los dispositivos dados.</span></li>\r\n<li><u><span>django-admin changepassword</span></u><span>&nbsp;: ofrece un m&eacute;todo para cambiar la contrase&ntilde;a del usuario.</span></li>\r\n<li><u><span>django-admin createduperuser</span></u><span>&nbsp;: crea una cuenta de usuario con todos los permisos (tambi&eacute;n conocida como cuenta de superusuario).</span></li>\r\n<li><u><span>django-admin remove_stale_contenttypes</span></u><span>&nbsp;: elimina los tipos de contenido obsoletos (de los modelos eliminados) en su base de datos.</span></li>\r\n<li><u><span>django-admin clearsessions</span></u><span>&nbsp;: se puede usar para limpiar sesiones caducadas o como trabajo cron.</span></li>\r\n</ul>\r\n</article>\r\n</section>\r\n<section id="jinja-templating">\r\n<h3><span>10. &iquest;Qu&eacute; son las plantillas de Jinja?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>Jinja Templating es un motor de plantillas muy popular para Python, la &uacute;ltima versi&oacute;n es Jinja2.&nbsp;</span></p>\r\n<p><span>Algunas de sus caracter&iacute;sticas son:</span></p>\r\n<ul>\r\n<li><span>Ejecuci&oacute;n de Sandbox: este es un marco de Sandbox (o protegido) para automatizar el proceso de prueba.</span></li>\r\n<li><span>HTML Escaping: proporciona HTML Escaping autom&aacute;tico ya que &lt;,&gt;, &amp; los caracteres tienen valores especiales en las plantillas y si se usa un texto normal, estos s&iacute;mbolos pueden conducir a XSS Attacks que Jinja maneja autom&aacute;ticamente.</span></li>\r\n<li><span>Herencia de plantilla</span></li>\r\n<li><span>Genera plantillas HTML mucho m&aacute;s r&aacute;pido que el motor predeterminado</span></li>\r\n<li><span>M&aacute;s f&aacute;cil de depurar en comparaci&oacute;n con el motor predeterminado.</span></li>\r\n</ul>\r\n</article>\r\n</section>\r\n<section id="django-url">\r\n<h3><span>11. &iquest;Qu&eacute; son las URL de Django?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>Las URL son una de las partes m&aacute;s importantes de una aplicaci&oacute;n web y Django le proporciona una forma elegante de dise&ntilde;ar sus propias URL personalizadas con la ayuda de su m&oacute;dulo conocido como URLconf (Configuraci&oacute;n de URL).&nbsp;La funcionalidad b&aacute;sica de este m&oacute;dulo de Python es que&nbsp;</span><br /><span>puede dise&ntilde;ar sus propias URL en Django de la forma que desee y luego asignarlas a la funci&oacute;n de Python (funci&oacute;n Ver).&nbsp;Estas URL pueden ser tanto est&aacute;ticas como din&aacute;micas.&nbsp;Estas URL est&aacute;n presentes en urls.py donde coinciden con la funci&oacute;n de vista equivalente.&nbsp;</span></p>\r\n<p><span>Sintaxis b&aacute;sica:</span></p>\r\n<pre><code class="language-python hljs"><span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> path\r\n<span class="hljs-keyword">from</span> . <span class="hljs-keyword">import</span> views<span></span>\r\nurlpatterns = [<span></span>\r\n   path(<span class="hljs-string">'data/2020/'</span>, views.data_2020),<span></span>\r\n   path(<span class="hljs-string">'data/&lt;int:year&gt;/'</span>, views.data_year)<span></span>\r\n]</code></pre>\r\n</article>\r\n</section>\r\n<section id="django-project-vs-app">\r\n<h3><span>12. &iquest;Cu&aacute;l es la diferencia entre un proyecto y una aplicaci&oacute;n en Django?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>En palabras simples, Project es la aplicaci&oacute;n completa de Django y una aplicaci&oacute;n es un m&oacute;dulo dentro del proyecto que se ocupa de un caso de uso espec&iacute;fico.&nbsp;</span><br /><span>Por ejemplo, sistema de pago (aplicaci&oacute;n) en la aplicaci&oacute;n de comercio electr&oacute;nico (Proyecto).</span></p>\r\n</article>\r\n</section>\r\n<section id="model-inheritance-styles-django">\r\n<h3><span>13. &iquest;Cu&aacute;les son los diferentes estilos de herencia de modelos en Django?</span></h3>\r\n<article class="ibpage-article">\r\n<ul>\r\n<li><strong><span>Herencia de clase base abstracta</span></strong><span>&nbsp;: se usa cuando solo necesita que la clase principal contenga informaci&oacute;n que no desea escribir para cada modelo secundario.</span></li>\r\n<li><strong><span>Herencia del modelo de varias tablas: se</span></strong><span>&nbsp;&nbsp;utiliza cuando se subclasifica un modelo existente y necesita que cada modelo tenga su propia tabla en la base de datos.</span></li>\r\n<li><strong><span>Herencia del modelo proxy: se</span></strong><span>&nbsp;&nbsp;utiliza cuando se desea conservar el campo del modelo mientras se modifica el funcionamiento del modelo a nivel de Python.</span></li>\r\n</ul>\r\n</article>\r\n</section>\r\n</div>\r\n<div id="django-intermediate-questions">\r\n<h2><span>Preguntas de la entrevista de nivel intermedio de Django</span></h2>\r\n<section id="django-signals">\r\n<h3><span>14. &iquest;Qu&eacute; son las se&ntilde;ales de Django?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>Siempre que haya una modificaci&oacute;n en un modelo, es posible que necesitemos activar algunas acciones.&nbsp;</span><br /><span>Django proporciona una forma elegante de manejarlos en forma de se&ntilde;ales.&nbsp;Las se&ntilde;ales son las utilidades que nos permiten asociar eventos con acciones.&nbsp;Podemos implementarlos desarrollando una funci&oacute;n que se ejecutar&aacute; cuando una se&ntilde;al la llame.</span></p>\r\n<p><strong><span>Lista de se&ntilde;ales integradas en los modelos:</span></strong></p>\r\n<figure class="table">\r\n<table>\r\n<thead>\r\n<tr>\r\n<th><span>Se&ntilde;ales</span></th>\r\n<th><span>Descripci&oacute;n</span></th>\r\n</tr>\r\n</thead>\r\n<tbody>\r\n<tr>\r\n<td><span>django.db.models.pre_init &amp;</span><br /><span>django.db.models.post_init</span></td>\r\n<td><span>Enviado antes o despu&eacute;s de llamar al m&eacute;todo _init_ () de un modelo</span></td>\r\n</tr>\r\n<tr>\r\n<td><span>django.db.models.signals.pre_save &amp; django.db.models.signals.post_save</span></td>\r\n<td><span>Enviado antes o despu&eacute;s de que se llame al m&eacute;todo save () de un modelo</span></td>\r\n</tr>\r\n<tr>\r\n<td><span>django.db.models.signals.pre_delete &amp;</span><br /><span>django.db.models.signals.post_delete</span></td>\r\n<td><span>Enviado antes o despu&eacute;s de que se llame al m&eacute;todo delete () de un modelo o al m&eacute;todo delete () de queryset</span></td>\r\n</tr>\r\n<tr>\r\n<td><span>django.db.models.signals.m2m_changed</span></td>\r\n<td><span>Se env&iacute;a cuando se cambia ManyToManyField</span></td>\r\n</tr>\r\n<tr>\r\n<td><span>django.core.signals.request_started &amp;</span><br /><span>django.core.signals.request_finished</span></td>\r\n<td><span>Se env&iacute;a cuando se inicia o finaliza una solicitud HTTP</span></td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n</figure>\r\n</article>\r\n</section>\r\n<section id="django-caching"></section>\r\n</div>	blog-images/intro/1_25Le7KoMK_z6BIaM8x74RA_KuPQkmT.png		t
+6	2021-07-13 08:44:41.791103+00	2021-07-13 08:46:26.053241+00	Preguntas básicas de la entrevista de Django parte 3	preguntas-basicas-de-la-entrevista-de-django-parte-3		100	3	1	<div id="django-intermediate-questions">\r\n<section id="django-caching">\r\n<h3><span>15. &iquest;Explica las estrategias de almacenamiento en cach&eacute; en Django?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>El almacenamiento en cach&eacute; se refiere a la t&eacute;cnica de almacenar los resultados de salida cuando se procesan inicialmente para que la pr&oacute;xima vez, cuando se obtengan los mismos resultados nuevamente, en lugar de procesar nuevamente, se puedan usar los resultados ya almacenados, lo que conduce a un acceso m&aacute;s r&aacute;pido y a una menor utilizaci&oacute;n de recursos. .&nbsp;Django nos proporciona un sistema de cach&eacute; robusto que puede almacenar p&aacute;ginas web din&aacute;micas para que estas p&aacute;ginas no necesiten ser evaluadas nuevamente para cada solicitud.&nbsp;</span><br /><br /><span>Algunas de las estrategias de almacenamiento en cach&eacute; en Django se enumeran a continuaci&oacute;n:</span></p>\r\n<figure class="table">\r\n<table>\r\n<thead>\r\n<tr>\r\n<th><span>Estrategia</span></th>\r\n<th><span>Descripci&oacute;n</span></th>\r\n</tr>\r\n</thead>\r\n<tbody>\r\n<tr>\r\n<td><span>Memcached</span></td>\r\n<td><span>Un servidor de cach&eacute; basado en memoria es el m&aacute;s r&aacute;pido y eficiente</span></td>\r\n</tr>\r\n<tr>\r\n<td><span>Almacenamiento en cach&eacute; del sistema de archivos</span></td>\r\n<td><span>Los valores de la cach&eacute; se almacenan como archivos separados en un orden serializado</span></td>\r\n</tr>\r\n<tr>\r\n<td><span>Almacenamiento en cach&eacute; de memoria local</span></td>\r\n<td><span>Esto se usa como la estrategia de cach&eacute; predeterminada por Django si no ha configurado nada.&nbsp;Es por proceso y seguro para subprocesos.</span></td>\r\n</tr>\r\n<tr>\r\n<td><span>Almacenamiento en cach&eacute; de la base de datos&nbsp;</span></td>\r\n<td><span>Los datos de la cach&eacute; se almacenar&aacute;n en la base de datos y funcionan muy bien si tiene un servidor de base de datos r&aacute;pido y bien indexado.</span></td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n</figure>\r\n</article>\r\n</section>\r\n<section id="django-authentication">\r\n<h3><span>16. &iquest;Explica la autenticaci&oacute;n de usuario en Django?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>Django viene con un sistema de autenticaci&oacute;n de usuario incorporado, que maneja objetos como usuarios, grupos, permisos de usuario y pocas sesiones de usuario basadas en cookies.&nbsp;La autenticaci&oacute;n de usuario de Django no solo autentica al usuario, sino que tambi&eacute;n lo autoriza.</span><br /><br /><span>El sistema consta y opera sobre estos objetos:</span></p>\r\n<ul>\r\n<li><span>Usuarios</span></li>\r\n<li><span>Permisos</span></li>\r\n<li><span>Grupos</span></li>\r\n<li><span>Sistema de hash de contrase&ntilde;a</span></li>\r\n<li><span>Validaci&oacute;n de formularios</span></li>\r\n<li><span>Un sistema backend conectable</span></li>\r\n</ul>\r\n</article>\r\n</section>\r\n<section id="django-static-files">\r\n<h3><span>17. &iquest;C&oacute;mo configurar archivos est&aacute;ticos?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>Aseg&uacute;rese de que&nbsp;</span><code>django.contrib.staticfiles</code><span>se agregue a su</span><code>INSTALLED_APPS</code></p>\r\n<p><span>En su archivo de configuraci&oacute;n.&nbsp;defina STATIC_URL por ej.</span></p>\r\n<p><code>STATIC_URL = '/static/'</code></p>\r\n<p><span>En sus plantillas de Django, use la etiqueta de plantilla est&aacute;tica para crear la URL para la ruta relativa dada usando STATICFILES_STORAGE configurado.</span></p>\r\n<pre><code class="language-plaintext hljs">{% load static %}<span></span>\r\n&lt;img src="{% static 'my_sample/abcxy.jpg' %}" alt="ABC image"&gt;</code></pre>\r\n<p><span>Almacene sus archivos est&aacute;ticos en una carpeta llamada&nbsp;</span><code>static</code><span>en su aplicaci&oacute;n.&nbsp;Por ejemplo</span><code>my_sample/static/my_sample/abcxy.jpg</code></p>\r\n</article>\r\n</section>\r\n<section id="django-response-lifecycle">\r\n<h3><span>18. &iquest;Explica el ciclo de vida de la respuesta de Django?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>Siempre que se realiza una solicitud a una p&aacute;gina web, Django crea un objeto HttpRequest que contiene metadatos sobre la solicitud.&nbsp;Despu&eacute;s de eso, Django carga la vista particular, pasando HttpRequest como primer argumento a la funci&oacute;n de vista.&nbsp;Cada vista devolver&aacute; un objeto HttpResponse.</span><br /><span>En general, los siguientes pasos ocurren cuando Django recibe una solicitud:</span></p>\r\n<ol>\r\n<li><span>Primero se carga el archivo settings.py de Django, que tambi&eacute;n contiene varias clases de middleware (&nbsp;</span><code>MIDDLEWARES</code><span>)</span></li>\r\n<li><span>Los middlewares tambi&eacute;n se ejecutan en el orden en que se mencionan en el&nbsp;</span><code>MIDDLEWAREST</code></li>\r\n<li><span>A partir de aqu&iacute;, la solicitud se mueve ahora al enrutador de URL, que simplemente obtiene la ruta de la URL de la solicitud e intenta mapear con nuestras rutas de URL dadas en urls.py.&nbsp;</span></li>\r\n<li><span>Tan pronto como se haya mapeado, llamar&aacute; a la funci&oacute;n de vista equivalente, desde donde se genera una respuesta equivalente</span></li>\r\n<li><span>La respuesta tambi&eacute;n pasa a trav&eacute;s de los middlewares de respuesta y se env&iacute;a de vuelta al cliente / navegador.</span></li>\r\n</ol>\r\n</article>\r\n</section>\r\n<section id="supported-databases">\r\n<h3><span>19. &iquest;Qu&eacute; bases de datos son compatibles con Django?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>PostgreSQL y MySQL, SQLite y Oracle.&nbsp;Aparte de estos, Django tambi&eacute;n admite bases de datos como ODBC, Microsoft SQL Server, IBM DB2, SAP SQL Anywhere y Firebird utilizando paquetes de terceros.&nbsp;Nota: Oficialmente, Django no admite ninguna base de datos sin SQL.</span></p>\r\n</article>\r\n</section>\r\n<section id="session-framework">\r\n<h3><span>20. &iquest;Cu&aacute;l es el uso de un marco de sesi&oacute;n?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>Con el marco de la sesi&oacute;n, puede almacenar y recuperar f&aacute;cilmente datos arbitrarios basados ​​en los visitantes previos al sitio.&nbsp;Almacena datos en el lado del servidor y se encarga del proceso de env&iacute;o y recepci&oacute;n de cookies.&nbsp;Estas cookies solo consisten en un ID de sesi&oacute;n, no los datos reales en s&iacute;, a menos que utilice expl&iacute;citamente un backend basado en cookies.</span></p>\r\n</article>\r\n</section>\r\n<section id="django-middleware">\r\n<h3><span>21. &iquest;Cu&aacute;l es el uso de Middleware en Django?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>El middleware es algo que se ejecuta entre la solicitud y la respuesta.&nbsp;En palabras simples, puede decir que act&uacute;a como un puente entre la solicitud y la respuesta.&nbsp;De manera similar, en Django, cuando se realiza una solicitud, se mueve a trav&eacute;s de middlewares a vistas y los datos se pasan a trav&eacute;s de middleware como respuesta.&nbsp;</span></p>\r\n</article>\r\n</section>\r\n<section id="django-context">\r\n<h3><span>22. &iquest;Qu&eacute; es el contexto en Django?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>El contexto es un nombre de variable de plantilla de mapeo de diccionario que se le da a los objetos Python en Django.&nbsp;Este es el nombre general, pero puede dar cualquier otro nombre de su elecci&oacute;n si lo desea.</span></p>\r\n</article>\r\n</section>\r\n<section id="django-shortcuts-render">\r\n<h3><span>23. &iquest;Qu&eacute; es la funci&oacute;n django.shortcuts.render?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>Cuando una funci&oacute;n de vista devuelve una p&aacute;gina web como HttpResponse en lugar de una cadena simple, usamos render ().&nbsp;La funci&oacute;n de renderizado es una funci&oacute;n de acceso directo que permite al desarrollador pasar f&aacute;cilmente el diccionario de datos con la plantilla.&nbsp;Esta funci&oacute;n luego combina la plantilla con un diccionario de datos a trav&eacute;s del motor de plantillas.&nbsp;Finalmente, este render () regresa como HttpResponse con el texto renderizado, que son los datos devueltos por los modelos.&nbsp;Por lo tanto, Django render () pasa por alto la mayor parte del trabajo del desarrollador y le permite usar diferentes motores de plantilla.</span><br /><span>La sintaxis b&aacute;sica:</span><br /><code>render(request, template_name, context=None, content_type=None, status=None, using=None)</code><br /><span>la solicitud es el par&aacute;metro que genera la respuesta.&nbsp;El nombre de la plantilla es la plantilla HTML utilizada, mientras que el contexto es un dictado de los datos pasados ​​en la p&aacute;gina desde Python.&nbsp;Tambi&eacute;n puede especificar el tipo de contenido, el estado de los datos que pas&oacute; y el render que est&aacute; devolviendo.</span></p>\r\n</article>\r\n</section>\r\n<section id="configure-django-settings">\r\n<h3><span>24. &iquest;Cu&aacute;l es el significado del archivo settings.py?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>Como su nombre indica, este archivo almacena las configuraciones o ajustes de nuestro proyecto Django, como la configuraci&oacute;n de la base de datos, los motores de backend, los middlewares, las aplicaciones instaladas, las configuraciones de URL principales, las direcciones de archivos est&aacute;ticos, los motores de plantillas, las configuraciones de URL principales, las claves de seguridad, los hosts permitidos y mucho m&aacute;s.</span></p>\r\n</article>\r\n</section>\r\n<section id="how-to-view-items-in-model">\r\n<h3><span>25. &iquest;C&oacute;mo ver todos los elementos del modelo?</span></h3>\r\n<article class="ibpage-article">\r\n<p><code>ModelName.objects.all()</code></p>\r\n</article>\r\n</section>\r\n<section id="filter-items-in-model">\r\n<h3><span>26. &iquest;C&oacute;mo filtrar elementos en el modelo?</span></h3>\r\n<article class="ibpage-article">\r\n<p><code>ModelName.objects.filter(field_name=&rdquo;term&rdquo;)</code></p>\r\n</article>\r\n</section>\r\n</div>\r\n<div id="django-advanced-questions">\r\n<h2><span>Preguntas avanzadas de la entrevista de Django</span></h2>\r\n<section id="file-based-sessions">\r\n<h3><span>27. &iquest;C&oacute;mo utilizar sesiones basadas en archivos?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>Para usar el mismo, debe establecer la&nbsp;</span><code>SESSION_ENGINE</code><span>configuraci&oacute;n en</span><code>"django.contrib.sessions.backends.file"</code></p>\r\n</article>\r\n</section>\r\n<section id="what-is-mixin">\r\n<h3><span>28. &iquest;Qu&eacute; es el mixin?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>Mixin es un tipo de herencia m&uacute;ltiple en el que puede combinar comportamientos y atributos de m&aacute;s de una clase principal.&nbsp;Nos proporciona una forma excelente de reutilizar c&oacute;digo de varias clases.&nbsp;Un inconveniente de usar estos mixins es que se vuelve dif&iacute;cil analizar qu&eacute; est&aacute; haciendo una clase y qu&eacute; m&eacute;todos anular en caso de que su c&oacute;digo est&eacute; demasiado disperso entre varias clases.</span></p>\r\n</article>\r\n</section>\r\n<section id="django-field-class">\r\n<h3><span>29. &iquest;Qu&eacute; es la clase de campo Django?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>'Campo' se refiere a una clase abstracta que representa una columna en la tabla de la base de datos.&nbsp;</span><br /><span>La clase Field es solo una subclase de RegisterLookupMixin.&nbsp;En Django, estos campos se usan para crear tablas de base de datos (db_types ()) que se usan para mapear tipos de Python a la base de datos usando get_prep_value () y al rev&eacute;s usando el m&eacute;todo from_db_value ().&nbsp;Por lo tanto, los campos son piezas fundamentales en diferentes API de Django, como modelos y conjuntos de consultas.</span></p>\r\n</article>\r\n</section>\r\n<section id="why-permanent-redirection-not-good-option">\r\n<h3><span>30. &iquest;Por qu&eacute; la redirecci&oacute;n permanente no es una buena opci&oacute;n?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>La redirecci&oacute;n permanente se usa solo cuando no desea dirigir a los visitantes a las URL antiguas.&nbsp;El navegador almacena en cach&eacute; la respuesta de las redirecciones permanentes, por lo que cuando intenta redirigir a otra cosa, causar&aacute; problemas.&nbsp;Dado que esta es una operaci&oacute;n del lado del navegador, si su usuario desea pasar a una nueva p&aacute;gina, cargar&aacute; la misma p&aacute;gina.</span></p>\r\n</article>\r\n</section>\r\n</div>	blog-images/intro/1_25Le7KoMK_z6BIaM8x74RA_YnjYfcx.png		t
+7	2021-07-13 08:45:18.724617+00	2021-07-13 08:46:29.13568+00	Preguntas básicas de la entrevista de Django parte 4	preguntas-basicas-de-la-entrevista-de-django-parte-4		100	3	1	<section id="django-onetoone-vs-foreignkey-field">\r\n<h3><span>31. &iquest;Diferencia entre Django OneToOneField y ForeignKey Field?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>Ambos son de los tipos de campos m&aacute;s comunes utilizados en Django.&nbsp;La &uacute;nica diferencia entre estos dos es que el campo ForeignKey consiste en la opci&oacute;n on_delete junto con la clase de un modelo porque se usa para relaciones de muchos a uno mientras que, por otro lado, OneToOneField, solo lleva a cabo una relaci&oacute;n de uno a uno y requiere solo la clase del modelo.</span></p>\r\n</article>\r\n</section>\r\n<section id="combine-multiple-querysets-in-view">\r\n<h3><span>32. &iquest;C&oacute;mo se pueden combinar varios QuerySets en una vista?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>Inicialmente, se cree que la concatenaci&oacute;n de QuerySets en listas es el enfoque m&aacute;s sencillo.&nbsp;Aqu&iacute; hay un ejemplo de c&oacute;mo hacer eso:</span><br /><span>desde itertools import chain</span><br /><code>result_list = list(chain(model1_list, model2_list, model3_list))</code></p>\r\n</article>\r\n</section>\r\n<section id="how-to-get-particular-item-in-model">\r\n<h3><span>33. &iquest;C&oacute;mo conseguir un art&iacute;culo en particular en el modelo?</span></h3>\r\n<article class="ibpage-article">\r\n<p><code>ModelName.objects.get(id=&rdquo;term&rdquo;)</code><br /><span>Nota: Si no hay resultados que coincidan con la consulta, get () generar&aacute; una&nbsp;excepci&oacute;n&nbsp;</span><strong><span>DoesNotExist</span></strong><span>&nbsp;.&nbsp;Si m&aacute;s de un elemento coincide con la consulta get () dada.&nbsp;En este caso, generar&aacute;&nbsp;</span><strong><span>MultipleObjectsReturned</span></strong><span>&nbsp;, que tambi&eacute;n es un atributo de la clase del modelo en s&iacute;.</span></p>\r\n</article>\r\n</section>\r\n<section id="obtain-sql-query-from-queryset">\r\n<h3><span>34. &iquest;C&oacute;mo obtener la consulta SQL del conjunto de consultas?</span></h3>\r\n<article class="ibpage-article">\r\n<p><code>print(queryset.query)</code></p>\r\n</article>\r\n</section>\r\n<section id="customize-django-admin-interface">\r\n<h3><span>35. &iquest;Cu&aacute;les son las formas de personalizar la funcionalidad de la interfaz de administraci&oacute;n de Django?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>Hay varias formas de personalizar la funcionalidad de la interfaz de administraci&oacute;n de Django.&nbsp;Puede usar un formulario de agregar / cambiar generado autom&aacute;ticamente por Django, puede agregar m&oacute;dulos de JavaScript usando el par&aacute;metro js.&nbsp;Este par&aacute;metro es b&aacute;sicamente una lista de URL que apuntan a los m&oacute;dulos de JavaScript que se incluir&aacute;n en su proyecto dentro de una etiqueta &lt;script&gt;.&nbsp;Tambi&eacute;n puede escribir vistas para el administrador si lo desea.</span></p>\r\n</article>\r\n</section>\r\n<section id="prefetch_related-and-select_related-functions-in-django">\r\n<h3><span>36. &iquest;Diferencia entre select_related y prefetch_related?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>Aunque ambas funciones se utilizan para buscar los campos relacionados en un modelo, su funcionamiento es un poco diferente entre s&iacute;.&nbsp;En palabras simples, select_related usa una relaci&oacute;n de clave externa, es decir, usa join en la consulta en s&iacute;, mientras que en prefetch_related hay una b&uacute;squeda separada y la combinaci&oacute;n en el lado de Python.&nbsp;Intentemos ilustrar esto con un ejemplo:</span></p>\r\n<pre><code class="language-python hljs"><span class="hljs-keyword">from</span> django.db <span class="hljs-keyword">import</span> models\r\n<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Country</span>(<span class="hljs-params">models.Model</span>):</span>\r\n    country_name = models.CharField(max_length=<span class="hljs-number">5</span>)\r\n<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">State</span>(<span class="hljs-params">models.Model</span>):</span>\r\n    state_name = models.CharField(max_length=<span class="hljs-number">5</span>)<span></span>\r\n    country = model.ForeignKey(Country)<span></span>\r\n&gt;&gt; states = State.objects.select_related(&lsquo;country&rsquo;).<span class="hljs-built_in">all</span>()<span></span>\r\n&gt;&gt; <span class="hljs-keyword">for</span> state <span class="hljs-keyword">in</span> states:<span></span>\r\n&hellip;   print(state.state_name)  <span></span>\r\n```Query Executed<span></span>\r\nSELECT state_id, state_name, country_name FROM State INNER JOIN Country ON (State.country_id = Country.<span class="hljs-built_in">id</span>)<span></span>\r\n```<span></span>\r\n&gt;&gt; country = Country.objects.prefetch_related(&lsquo;state&rsquo;).get(<span class="hljs-built_in">id</span>=<span class="hljs-number">1</span>)<span></span>\r\n&gt;&gt; <span class="hljs-keyword">for</span> state <span class="hljs-keyword">in</span> country.state.<span class="hljs-built_in">all</span>():<span></span>\r\n&hellip;   print(state.state_name)<span></span>\r\n```Query Executed<span></span>\r\nSELECT <span class="hljs-built_in">id</span>, country_name FROM country WHERE <span class="hljs-built_in">id</span>=<span class="hljs-number">1</span>;<span></span>\r\nSELECT state_id, state_name WHERE State WHERE country_id IN (<span class="hljs-number">1</span>);<span></span>\r\n```</code></pre>\r\n</article>\r\n</section>\r\n<section id="q-objects-in-django-orm">\r\n<h3><span>37. &iquest;Explica los objetos Q en Django ORM?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>Los objetos Q se usan para escribir consultas complejas, como en las funciones filter () solo `Y` las condiciones, mientras que si desea` O` las condiciones, puede usar objetos Q.&nbsp;Veamos un ejemplo:</span></p>\r\n<pre><code class="language-python hljs"><span class="hljs-keyword">from</span> django.db <span class="hljs-keyword">import</span> models\r\n<span class="hljs-keyword">from</span> django.db.models <span class="hljs-keyword">import</span> Q<span></span>\r\n&gt;&gt; objects = Models.objects.get(<span></span>\r\n   Q(tag__startswith=<span class="hljs-string">'Human'</span>),<span></span>\r\n   Q(category=&rsquo;Eyes&rsquo;) | Q(category=&rsquo;Nose&rsquo;)<span></span>\r\n)<span></span>\r\n```Query Executed<span></span>\r\nSELECT * FROM Model WHERE tag LIKE &lsquo;Human%&rsquo; AND (category=&rsquo;Eyes&rsquo; OR category=&rsquo;Nose&rsquo;)<span></span>\r\n```</code></pre>\r\n</article>\r\n</section>\r\n<section id="django-exceptions">\r\n<h3><span>38. &iquest;Qu&eacute; son las excepciones de Django?</span></h3>\r\n<article class="ibpage-article">\r\n<p><span>Adem&aacute;s de las excepciones est&aacute;ndar de Python, Django plantea sus propias excepciones. Lista de excepciones de Django (https://docs.djangoproject.com/en/3.1/ref/exceptions/)</span></p>\r\n</article>\r\n</section>	blog-images/intro/1_25Le7KoMK_z6BIaM8x74RA_mg3PBlt.png		t
+\.
+
+
+--
+-- Data for Name: blog_blogarticle_tags; Type: TABLE DATA; Schema: public; Owner: blog_database
+--
+
+COPY public.blog_blogarticle_tags (id, blogarticle_id, blogtag_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: blog_blogtag; Type: TABLE DATA; Schema: public; Owner: blog_database
+--
+
+COPY public.blog_blogtag (id, created, modified, name, slug, color, user_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: blog_categoryarticle; Type: TABLE DATA; Schema: public; Owner: blog_database
+--
+
+COPY public.blog_categoryarticle (id, created, modified, title, slug, image, video, highlighting_weight, user_id) FROM stdin;
+1	2021-06-26 19:25:40.594626+00	2021-06-26 19:25:40.594655+00	Docker	docker	blog-images/153c52dc-30d9-499b-92b3-c8d32f888c0a.png		100	1
+2	2021-06-26 19:32:55.458163+00	2021-06-26 19:32:55.458185+00	Kubernetes	kubernetes	blog-images/153c52dc-30d9-499b-92b3-c8d32f888c0a_8VIWvMR.png		100	1
+3	2021-07-10 21:35:06.592388+00	2021-07-10 21:35:06.592419+00	Django	django	blog-images/1_25Le7KoMK_z6BIaM8x74RA.png		100	1
+\.
+
+
+--
+-- Data for Name: blog_configblog; Type: TABLE DATA; Schema: public; Owner: blog_database
+--
+
+COPY public.blog_configblog (id, created, modified, name_page, image, content, user_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: blog_database
+--
+
+COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+1	2021-06-26 19:25:40.60918+00	1	Docker	1	[{"added": {}}]	8	1
+2	2021-06-26 19:26:28.726766+00	1	Docker Error: Returned a Non-zero Code: 137	1	[{"added": {}}]	10	1
+3	2021-06-26 19:30:08.043533+00	1	Docker Error: Returned a Non-zero Code: 137	2	[{"changed": {"fields": ["Imagen de Introduccion"]}}]	10	1
+4	2021-06-26 19:31:35.673146+00	1	admin	2	[{"changed": {"fields": ["First name", "Last name"]}}]	4	1
+5	2021-06-26 19:32:55.459995+00	2	Kubernetes	1	[{"added": {}}]	8	1
+6	2021-06-26 19:36:23.673888+00	2	DUMP / RESTORE PostgreSQL Kubernetes	1	[{"added": {}}]	10	1
+7	2021-06-26 19:37:39.571556+00	2	DUMP / RESTORE PostgreSQL Kubernetes	2	[{"changed": {"fields": ["Introduccion"]}}]	10	1
+8	2021-06-26 19:50:59.468446+00	2	DUMP / RESTORE PostgreSQL Kubernetes	2	[{"changed": {"fields": ["Introduccion"]}}]	10	1
+9	2021-06-27 20:00:03.776184+00	2	DUMP / RESTORE PostgreSQL Kubernetes	2	[{"changed": {"fields": ["Imagen de Introduccion"]}}]	10	1
+10	2021-07-10 21:35:06.609171+00	3	Django	1	[{"added": {}}]	8	1
+11	2021-07-10 21:39:59.966401+00	3	Que es Django?	1	[{"added": {}}]	10	1
+12	2021-07-10 21:49:07.283544+00	3	Que es Django?	2	[{"changed": {"fields": ["Introduccion"]}}]	10	1
+13	2021-07-10 21:53:02.849205+00	3	Que es Django?	2	[{"changed": {"fields": ["Introduccion"]}}]	10	1
+14	2021-07-10 21:53:23.810702+00	3	Que es Django?	2	[{"changed": {"fields": ["Introduccion"]}}]	10	1
+15	2021-07-10 21:55:22.342096+00	3	Que es Django?	2	[{"changed": {"fields": ["Introduccion"]}}]	10	1
+16	2021-07-10 21:55:22.687514+00	3	Que es Django?	2	[]	10	1
+17	2021-07-10 21:55:35.406017+00	3	Que es Django?	2	[]	10	1
+18	2021-07-10 22:02:59.052745+00	4	Preguntas básicas de la entrevista de Django parte 1	1	[{"added": {}}]	10	1
+19	2021-07-10 22:04:03.077751+00	4	Preguntas básicas de la entrevista de Django parte 1	2	[{"changed": {"fields": ["Imagen de Introduccion"]}}]	10	1
+20	2021-07-13 08:43:13.675932+00	5	Preguntas básicas de la entrevista de Django parte 2	1	[{"added": {}}]	10	1
+21	2021-07-13 08:44:14.308679+00	5	Preguntas básicas de la entrevista de Django parte 2	2	[]	10	1
+22	2021-07-13 08:44:41.79694+00	6	Preguntas básicas de la entrevista de Django parte 3	1	[{"added": {}}]	10	1
+23	2021-07-13 08:45:18.728634+00	7	Preguntas básicas de la entrevista de Django parte 4	1	[{"added": {}}]	10	1
+24	2021-07-13 08:46:17.489109+00	4	Preguntas básicas de la entrevista de Django parte 1	2	[]	10	1
+25	2021-07-13 08:46:21.994386+00	5	Preguntas básicas de la entrevista de Django parte 2	2	[]	10	1
+26	2021-07-13 08:46:26.056962+00	6	Preguntas básicas de la entrevista de Django parte 3	2	[]	10	1
+27	2021-07-13 08:46:29.138878+00	7	Preguntas básicas de la entrevista de Django parte 4	2	[]	10	1
+28	2021-07-25 22:42:13.203216+00	8	Que es lo que hace On_delete en los Modelos Django	1	[{"added": {}}]	10	1
+29	2021-07-25 22:44:59.838127+00	8	Que es lo que hace On_delete en los Modelos Django	2	[{"changed": {"fields": ["Imagen de Introduccion"]}}]	10	1
+30	2021-07-25 23:04:08.786116+00	8	Que es lo que hace On_delete en los Modelos Django	2	[{"changed": {"fields": ["Introduccion"]}}]	10	1
+\.
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: blog_database
+--
+
+COPY public.django_content_type (id, app_label, model) FROM stdin;
+1	admin	logentry
+2	auth	permission
+3	auth	group
+4	auth	user
+5	contenttypes	contenttype
+6	sessions	session
+7	blog	configblog
+8	blog	categoryarticle
+9	blog	blogtag
+10	blog	blogarticle
+11	userprofile	userprofile
+\.
+
+
+--
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: blog_database
+--
+
+COPY public.django_migrations (id, app, name, applied) FROM stdin;
+1	contenttypes	0001_initial	2021-06-25 23:08:07.976362+00
+2	auth	0001_initial	2021-06-25 23:08:08.029682+00
+3	admin	0001_initial	2021-06-25 23:08:08.105727+00
+4	admin	0002_logentry_remove_auto_add	2021-06-25 23:08:08.124496+00
+5	admin	0003_logentry_add_action_flag_choices	2021-06-25 23:08:08.136709+00
+6	contenttypes	0002_remove_content_type_name	2021-06-25 23:08:08.161662+00
+7	auth	0002_alter_permission_name_max_length	2021-06-25 23:08:08.168504+00
+8	auth	0003_alter_user_email_max_length	2021-06-25 23:08:08.179164+00
+9	auth	0004_alter_user_username_opts	2021-06-25 23:08:08.189318+00
+10	auth	0005_alter_user_last_login_null	2021-06-25 23:08:08.199806+00
+11	auth	0006_require_contenttypes_0002	2021-06-25 23:08:08.202938+00
+12	auth	0007_alter_validators_add_error_messages	2021-06-25 23:08:08.213087+00
+13	auth	0008_alter_user_username_max_length	2021-06-25 23:08:08.229464+00
+14	auth	0009_alter_user_last_name_max_length	2021-06-25 23:08:08.241655+00
+15	auth	0010_alter_group_name_max_length	2021-06-25 23:08:08.251698+00
+16	auth	0011_update_proxy_permissions	2021-06-25 23:08:08.26303+00
+17	blog	0001_initial	2021-06-25 23:08:08.338295+00
+18	blog	0002_auto_20210417_2232	2021-06-25 23:08:08.405311+00
+19	blog	0003_auto_20210417_2308	2021-06-25 23:08:08.441244+00
+20	blog	0004_auto_20210417_2317	2021-06-25 23:08:08.48056+00
+21	blog	0005_auto_20210417_2332	2021-06-25 23:08:08.545527+00
+22	blog	0006_blogarticle_quotes	2021-06-25 23:08:08.559927+00
+23	sessions	0001_initial	2021-06-25 23:08:08.572925+00
+24	blog	0007_auto_20210627_1914	2021-06-28 04:19:28.220118+00
+25	userprofile	0001_initial	2021-06-28 04:19:28.264859+00
+26	auth	0012_alter_user_first_name_max_length	2021-07-12 01:23:02.246292+00
+\.
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: blog_database
+--
+
+COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
+rhhgkwhb8kjsmdlc6ia9xdc1hsimwfy1	YTA1NzFmMDRjMWNlN2MzYjYzMzFhZjJiMjExNTU0ZDcwMmM1NzQ2MTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjYWViYzY1Mzc2MzNjMDAxMTVmMDE1YjA2ZDljN2Q0OTI0MzdmMjU1In0=	2021-07-10 18:25:47.886717+00
+gs0b19h7xdcg94xkua0h0lk2hy93tokv	YTA1NzFmMDRjMWNlN2MzYjYzMzFhZjJiMjExNTU0ZDcwMmM1NzQ2MTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjYWViYzY1Mzc2MzNjMDAxMTVmMDE1YjA2ZDljN2Q0OTI0MzdmMjU1In0=	2021-07-24 21:32:49.749688+00
+bux7xm2dgw3jf43jlaaewccyb25hctir	YTA1NzFmMDRjMWNlN2MzYjYzMzFhZjJiMjExNTU0ZDcwMmM1NzQ2MTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjYWViYzY1Mzc2MzNjMDAxMTVmMDE1YjA2ZDljN2Q0OTI0MzdmMjU1In0=	2021-07-25 01:05:46.83123+00
+1ewxkmxy1nm0p521u4fh4dcnn9fs2j2a	YTA1NzFmMDRjMWNlN2MzYjYzMzFhZjJiMjExNTU0ZDcwMmM1NzQ2MTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjYWViYzY1Mzc2MzNjMDAxMTVmMDE1YjA2ZDljN2Q0OTI0MzdmMjU1In0=	2021-08-08 22:35:43.190037+00
+\.
+
+
+--
+-- Data for Name: userprofile_userprofile; Type: TABLE DATA; Schema: public; Owner: blog_database
+--
+
+COPY public.userprofile_userprofile (id, created, modified, first_name, last_name, ocupation, image, slug, facebook_url, linkedin_url, twitter_url, instagram_url, user_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: blog_database
+--
+
+SELECT pg_catalog.setval('public.auth_group_id_seq', 1, false);
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: blog_database
+--
+
+SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: blog_database
+--
+
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 44, true);
+
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: blog_database
+--
+
+SELECT pg_catalog.setval('public.auth_user_groups_id_seq', 1, false);
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: blog_database
+--
+
+SELECT pg_catalog.setval('public.auth_user_id_seq', 1, true);
+
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: blog_database
+--
+
+SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
+
+
+--
+-- Name: blog_blogarticle_id_seq; Type: SEQUENCE SET; Schema: public; Owner: blog_database
+--
+
+SELECT pg_catalog.setval('public.blog_blogarticle_id_seq', 8, true);
+
+
+--
+-- Name: blog_blogarticle_tags_id_seq; Type: SEQUENCE SET; Schema: public; Owner: blog_database
+--
+
+SELECT pg_catalog.setval('public.blog_blogarticle_tags_id_seq', 1, false);
+
+
+--
+-- Name: blog_blogtag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: blog_database
+--
+
+SELECT pg_catalog.setval('public.blog_blogtag_id_seq', 1, false);
+
+
+--
+-- Name: blog_categoryarticle_id_seq; Type: SEQUENCE SET; Schema: public; Owner: blog_database
+--
+
+SELECT pg_catalog.setval('public.blog_categoryarticle_id_seq', 3, true);
+
+
+--
+-- Name: blog_configblog_id_seq; Type: SEQUENCE SET; Schema: public; Owner: blog_database
+--
+
+SELECT pg_catalog.setval('public.blog_configblog_id_seq', 1, false);
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: blog_database
+--
+
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 30, true);
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: blog_database
+--
+
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 11, true);
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: blog_database
+--
+
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 26, true);
+
+
+--
+-- Name: userprofile_userprofile_id_seq; Type: SEQUENCE SET; Schema: public; Owner: blog_database
+--
+
+SELECT pg_catalog.setval('public.userprofile_userprofile_id_seq', 1, false);
+
+
+--
+-- Name: auth_group auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_permission_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_0cd325b0_uniq UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_codename_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_01ab375a_uniq UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups auth_user_groups_user_id_group_id_94350c0c_uniq; Type: CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_group_id_94350c0c_uniq UNIQUE (user_id, group_id);
+
+
+--
+-- Name: auth_user auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.auth_user
+    ADD CONSTRAINT auth_user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_permission_id_14a6b632_uniq; Type: CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_permission_id_14a6b632_uniq UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: auth_user auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.auth_user
+    ADD CONSTRAINT auth_user_username_key UNIQUE (username);
+
+
+--
+-- Name: blog_blogarticle blog_blogarticle_pkey; Type: CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.blog_blogarticle
+    ADD CONSTRAINT blog_blogarticle_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: blog_blogarticle_tags blog_blogarticle_tags_blogarticle_id_blogtag_id_41ef922b_uniq; Type: CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.blog_blogarticle_tags
+    ADD CONSTRAINT blog_blogarticle_tags_blogarticle_id_blogtag_id_41ef922b_uniq UNIQUE (blogarticle_id, blogtag_id);
+
+
+--
+-- Name: blog_blogarticle_tags blog_blogarticle_tags_pkey; Type: CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.blog_blogarticle_tags
+    ADD CONSTRAINT blog_blogarticle_tags_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: blog_blogtag blog_blogtag_pkey; Type: CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.blog_blogtag
+    ADD CONSTRAINT blog_blogtag_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: blog_categoryarticle blog_categoryarticle_pkey; Type: CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.blog_categoryarticle
+    ADD CONSTRAINT blog_categoryarticle_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: blog_configblog blog_configblog_pkey; Type: CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.blog_configblog
+    ADD CONSTRAINT blog_configblog_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_admin_log django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type django_content_type_app_label_model_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_app_label_model_76bd3d3b_uniq UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_migrations django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: userprofile_userprofile userprofile_userprofile_pkey; Type: CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.userprofile_userprofile
+    ADD CONSTRAINT userprofile_userprofile_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: userprofile_userprofile userprofile_userprofile_user_id_key; Type: CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.userprofile_userprofile
+    ADD CONSTRAINT userprofile_userprofile_user_id_key UNIQUE (user_id);
+
+
+--
+-- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX auth_group_name_a6ea08ec_like ON public.auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_group_id_b120cbf9; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX auth_group_permissions_group_id_b120cbf9 ON public.auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id_84c5c92e; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX auth_group_permissions_permission_id_84c5c92e ON public.auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_content_type_id_2f476e4b; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX auth_permission_content_type_id_2f476e4b ON public.auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: auth_user_groups_group_id_97559544; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX auth_user_groups_group_id_97559544 ON public.auth_user_groups USING btree (group_id);
+
+
+--
+-- Name: auth_user_groups_user_id_6a12ed8b; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX auth_user_groups_user_id_6a12ed8b ON public.auth_user_groups USING btree (user_id);
+
+
+--
+-- Name: auth_user_user_permissions_permission_id_1fbb5f2c; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX auth_user_user_permissions_permission_id_1fbb5f2c ON public.auth_user_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_user_user_permissions_user_id_a95ead1b; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX auth_user_user_permissions_user_id_a95ead1b ON public.auth_user_user_permissions USING btree (user_id);
+
+
+--
+-- Name: auth_user_username_6821ab7c_like; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX auth_user_username_6821ab7c_like ON public.auth_user USING btree (username varchar_pattern_ops);
+
+
+--
+-- Name: blog_blogarticle_category_id_10be0fb4; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX blog_blogarticle_category_id_10be0fb4 ON public.blog_blogarticle USING btree (category_id);
+
+
+--
+-- Name: blog_blogarticle_slug_553e3058; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX blog_blogarticle_slug_553e3058 ON public.blog_blogarticle USING btree (slug);
+
+
+--
+-- Name: blog_blogarticle_slug_553e3058_like; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX blog_blogarticle_slug_553e3058_like ON public.blog_blogarticle USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: blog_blogarticle_tags_blogarticle_id_ca8846c1; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX blog_blogarticle_tags_blogarticle_id_ca8846c1 ON public.blog_blogarticle_tags USING btree (blogarticle_id);
+
+
+--
+-- Name: blog_blogarticle_tags_blogtag_id_72df2fc5; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX blog_blogarticle_tags_blogtag_id_72df2fc5 ON public.blog_blogarticle_tags USING btree (blogtag_id);
+
+
+--
+-- Name: blog_blogarticle_user_id_49ae3033; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX blog_blogarticle_user_id_49ae3033 ON public.blog_blogarticle USING btree (user_id);
+
+
+--
+-- Name: blog_blogtag_slug_eecf3988; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX blog_blogtag_slug_eecf3988 ON public.blog_blogtag USING btree (slug);
+
+
+--
+-- Name: blog_blogtag_slug_eecf3988_like; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX blog_blogtag_slug_eecf3988_like ON public.blog_blogtag USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: blog_blogtag_user_id_5b5b3cd4; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX blog_blogtag_user_id_5b5b3cd4 ON public.blog_blogtag USING btree (user_id);
+
+
+--
+-- Name: blog_categoryarticle_slug_21d3d61d; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX blog_categoryarticle_slug_21d3d61d ON public.blog_categoryarticle USING btree (slug);
+
+
+--
+-- Name: blog_categoryarticle_slug_21d3d61d_like; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX blog_categoryarticle_slug_21d3d61d_like ON public.blog_categoryarticle USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: blog_categoryarticle_user_id_c5aa5398; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX blog_categoryarticle_user_id_c5aa5398 ON public.blog_categoryarticle USING btree (user_id);
+
+
+--
+-- Name: blog_configblog_user_id_8b4fbd4b; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX blog_configblog_user_id_8b4fbd4b ON public.blog_configblog USING btree (user_id);
+
+
+--
+-- Name: django_admin_log_content_type_id_c4bce8eb; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX django_admin_log_content_type_id_c4bce8eb ON public.django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_user_id_c564eba6; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX django_admin_log_user_id_c564eba6 ON public.django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_session_expire_date_a5c62663; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX django_session_expire_date_a5c62663 ON public.django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX django_session_session_key_c0390e0f_like ON public.django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- Name: userprofile_userprofile_slug_319777db; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX userprofile_userprofile_slug_319777db ON public.userprofile_userprofile USING btree (slug);
+
+
+--
+-- Name: userprofile_userprofile_slug_319777db_like; Type: INDEX; Schema: public; Owner: blog_database
+--
+
+CREATE INDEX userprofile_userprofile_slug_319777db_like ON public.userprofile_userprofile USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_2f476e4b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups auth_user_groups_group_id_97559544_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_group_id_97559544_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups auth_user_groups_user_id_6a12ed8b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_6a12ed8b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: blog_blogarticle blog_blogarticle_category_id_10be0fb4_fk_blog_cate; Type: FK CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.blog_blogarticle
+    ADD CONSTRAINT blog_blogarticle_category_id_10be0fb4_fk_blog_cate FOREIGN KEY (category_id) REFERENCES public.blog_categoryarticle(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: blog_blogarticle_tags blog_blogarticle_tag_blogarticle_id_ca8846c1_fk_blog_blog; Type: FK CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.blog_blogarticle_tags
+    ADD CONSTRAINT blog_blogarticle_tag_blogarticle_id_ca8846c1_fk_blog_blog FOREIGN KEY (blogarticle_id) REFERENCES public.blog_blogarticle(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: blog_blogarticle_tags blog_blogarticle_tags_blogtag_id_72df2fc5_fk_blog_blogtag_id; Type: FK CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.blog_blogarticle_tags
+    ADD CONSTRAINT blog_blogarticle_tags_blogtag_id_72df2fc5_fk_blog_blogtag_id FOREIGN KEY (blogtag_id) REFERENCES public.blog_blogtag(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: blog_blogarticle blog_blogarticle_user_id_49ae3033_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.blog_blogarticle
+    ADD CONSTRAINT blog_blogarticle_user_id_49ae3033_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: blog_blogtag blog_blogtag_user_id_5b5b3cd4_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.blog_blogtag
+    ADD CONSTRAINT blog_blogtag_user_id_5b5b3cd4_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: blog_categoryarticle blog_categoryarticle_user_id_c5aa5398_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.blog_categoryarticle
+    ADD CONSTRAINT blog_categoryarticle_user_id_c5aa5398_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: blog_configblog blog_configblog_user_id_8b4fbd4b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.blog_configblog
+    ADD CONSTRAINT blog_configblog_user_id_8b4fbd4b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_content_type_id_c4bce8eb_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_user_id_c564eba6_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_c564eba6_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: userprofile_userprofile userprofile_userprofile_user_id_59dda034_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: blog_database
+--
+
+ALTER TABLE ONLY public.userprofile_userprofile
+    ADD CONSTRAINT userprofile_userprofile_user_id_59dda034_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+\connect postgres
+
+SET default_transaction_read_only = off;
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.3
+-- Dumped by pg_dump version 10.3
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: DATABASE postgres; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON DATABASE postgres IS 'default administrative connection database';
+
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+\connect template1
+
+SET default_transaction_read_only = off;
+
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.3
+-- Dumped by pg_dump version 10.3
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: DATABASE template1; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON DATABASE template1 IS 'default template for new databases';
+
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database cluster dump complete
+--
+

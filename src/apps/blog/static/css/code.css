@@ -1,0 +1,12 @@
+/* CSS Simple Pre Code */
+pre {
+    background: #fff;
+    white-space: pre;
+    word-wrap: break-word;
+    overflow: auto;
+    padding: 15px;
+}
+
+code {
+    color: #e91e63;
+}
