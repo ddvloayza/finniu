@@ -16,7 +16,7 @@ MEDIA_URL = os.environ.setdefault("MEDIA_URL", "/media/")
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 STATIC_URL = os.environ.setdefault("STATIC_URL", "/static/")
 
-
+ALLOWED_HOSTS = os.environ.setdefault("ALLOWED_HOSTS", ["*"])
 
 INSTALLED_APPS.append('raven.contrib.django.raven_compat')
 # SESSIONS
