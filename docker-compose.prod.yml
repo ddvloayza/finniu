@@ -1,7 +1,7 @@
 version: '3'
 services:
   db:
-    image: "postgres:10.3-alpine"
+    image: "postgres:13-alpine"
     restart: unless-stopped
     env_file:
       - ./.env
@@ -11,7 +11,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   nginx:
-    image: nginx:1.15
+    image: nginx:1.22.1
     container_name: nginx01
     ports:
       - "7000:80"
