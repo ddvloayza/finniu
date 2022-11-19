@@ -3,17 +3,40 @@
     src: url("./fonts/fipps/Fipps-Regular.otf");
   }
 
-body.one-page {
+.first-fondo {
     background-image: url(images/Fondo-1.png);
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-position-y: inherit;
+    background-size: 100% 100%;
 }
 .second {
-    background-image: url(images/Fondo-2.png);
+    background-image: url(images/FondoPE.png);
     background-repeat: no-repeat;
-    background-size: 100%;
-    background-position-y: 50%;
+    background-position-y: inherit;
+    background-size: 100% 100%;
 }
+
+.section-investing {
+    background-image: url(images/FondoInferior.png);
+    background-repeat: no-repeat;
+    background-position-y: inherit;
+    background-size: 100% 100%;
+}
+
+.section-ahorro {
+    background-image: url(images/fondo-azul-cortado.png);
+    background-repeat: no-repeat;
+    background-position-y: inherit;
+    background-size: 100% 100%;
+}
+.section-join{
+    background-image: url(images/join-finniu.png);
+    background-repeat: no-repeat;
+    background-position-y: inherit;
+    background-size: 100% 100%;
+    
+}
+
 body {
     line-height: 2;
     font-size: 15px;
@@ -47,7 +70,7 @@ section#home{
     margin-left: 60%;
 }
 .img-coin {
-    width: 50%;
+    width: 100%;
     float: right;
 }
 
@@ -59,7 +82,6 @@ section#home{
 }
 .card {
     width: 100%;
-    height: 400px;
     
 }
 .card img {
@@ -80,4 +102,144 @@ section#home{
     top: -40px;
     z-index: 1;
     position: relative;
+}
+.title{
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 100%;
+    margin-bottom: 40px;
+    font-family: "Poppins", sans-serif;
+}
+.card-choose {
+    background-color: #A2E6FA;
+    border-radius: 30px;
+    display: block;
+    overflow: hidden;
+    padding: 40px 30px;
+}
+.container-text {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+.container-img {
+    position: relative;
+    overflow: hidden;
+    height: 200px;
+}
+.img-choose{
+    width: 250px;
+    margin: auto;
+}
+
+.flip {
+    width: 400px;
+    height: 400px;
+    text-align: center;
+    perspective: 600px;
+}
+  .flip-content {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.4s;
+    transform-style: preserve-3d;
+  }
+  .flip:hover .flip-content {
+    transform: rotateY(180deg);
+    transition: transform 0.3s;
+  }
+
+  .flip-front, .flip-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;  
+    background-color: #A2E6FA;
+    border-radius: 30px;
+    padding: 50px;
+  }
+  .flip-back {
+    transform: rotateY(180deg);
+    background-color: #0D3A5C;
+  }
+
+.text-color-blue {
+    color: #0D3A5C;
+}
+.text-color-lila {
+    color: #CDB6FF;
+}
+.p-back-text{
+    margin: auto;
+    position: relative;
+    top: 30%;
+}
+section{
+    min-height: min-content;
+}
+
+section.back-gradient {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 0%, rgba(207, 242, 255, 0.745592) 48.96%, #FFEEDD 99.72%, rgba(152, 220, 242, 0.95722) 99.73%, #8CD7EF 99.74%, #8CD7EF 99.75%, #8CD7EF 99.76%, rgba(188, 179, 244, 0.558409) 99.77%, rgba(188, 179, 244, 0.558409) 99.78%, #53B2D0 99.79%, #A89BF8 99.8%, rgba(160, 214, 239, 0.735626) 99.81%, rgba(160, 214, 239, 0.735626) 99.82%, #8CD7EF 99.83%, rgba(168, 206, 232, 0.547587) 99.84%, rgba(168, 206, 232, 0.547587) 99.85%, #53B2D0 99.86%, #83CCE1 99.87%, rgba(104, 162, 224, 0.667874) 99.88%, #C4DEFC 99.89%, rgba(104, 162, 224, 0.667874) 99.9%, #CAECFD 99.91%, #BCCBFB 99.92%, rgba(173, 221, 240, 0.745592) 99.93%, rgba(215, 228, 240, 0.422933) 99.94%);
+}
+section.back-gradient2{
+    background: linear-gradient(20.61deg, #006096 14.12%, #70BDDB 37.9%, #A2E6FA 58.09%, #FFFFFF 101.9%);
+}
+section.back-gradient3{
+    background: radial-gradient(96.02% 149.1% at 7.43% 3.98%, #BEF1FF 0%, rgba(190, 241, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+}
+.background-celeste {
+    background-color: #A2E6FA;
+}
+.background-lila {
+    background-color: #CDB6FF;
+}
+.background-morado {
+    background-color: #9381FF;
+}
+.border-contact {
+    border-radius: 30px;
+    border: 3px solid;
+    align-self: center;
+    padding: 20px;
+    justify-self: left;
+    margin-left: 20px;
+    border-color: #9381FF;
+}
+.container-selects{
+    margin: 10%;
+}
+.bg-piel{
+    background-color: #FFEEDD !important;
+}
+.button-celeste{
+    background-color: #A2E6FA !important;
+    border-radius: 30px;
+    padding: 15px;
+    color: #0D3A5C !important;
+}
+
+.card-img-testimonial {
+    margin: auto;
+    padding: 40px;
+    overflow: hidden;
+}
+.border-testi-1{
+    border: 4px solid #83CCE1;
+    border-radius: 50px;
+}
+.border-testi-2{
+    border: 4px solid #9381FF;
+    border-radius: 50px;
+}
+.section-empresas-inversion{
+    background: #FFEEDD;
+}
+
+.nav-sticky.scrolled {
+    background-color: #A2E6FA !important;
+    transition: background-color 200ms linear;
+    color:#0D3A5C !important;
+  }
+.shows{
+    display: block !important;
 }

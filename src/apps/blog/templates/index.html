@@ -20,28 +20,44 @@
 {% endblock css %}
 {% block content %}
                 <!-- ================== HOME ================== -->
-                <section id="home" class="section first columns-2 flex">
-                  <div class="columns-1">
-                    <h2 class="title w-3/4">
-                      Comienza a vivir
-                    </h2>
-                    <h2 class="title w-3/4">
-                      financieramente estable
-                    </h2>
-                    <h2 class="title w-3/4">
-                      junto a nosotros
-                    </h2>
-                    <p class="text-lg w-2/4">
-                      Cumple tus metas invirtiendo tu dinero y manejando tus finanzas de forma sencilla junto a nosotros 
-                    </p>
+                <section class="first-fondo">
+                  <div class="container pt-52">
+                    <div class="grid grid-cols-2 gap-8 py-8 px-6 md:grid-cols-2">
+                      <div>
+                        <h2 class="title w-3/4">
+                          Comienza a vivir
+                        </h2>
+                        <h2 class="title w-3/4">
+                          financieramente estable
+                        </h2>
+                        <h2 class="title w-3/4">
+                          junto a nosotros
+                        </h2>
+                        <p class="text-lg w-2/4">
+                          Cumple tus metas invirtiendo tu dinero y manejando tus finanzas de forma sencilla junto a nosotros 
+                        </p>
+                      </div>
+                      <div class="">
+                        <img src="{% static 'images/first-img.png' %}" class="img-coin" alt="Finniu Logo">
+                      </div>
+                    </div>
+                    
                   </div>
-                  <div class="absolute">
-                    <img src="{% static 'images/Imagenportada.png' %}" class="img-coin" alt="Finniu Logo">
-                  </div>
+                  
                     
               </section>
               <!-- ================= HOME END ================= -->
-              {% include 'servicios.html' %}
+              {% include 'about.html' %}
+              {% include 'our-numbers.html' %}
+              {% include 'choose.html' %}
+              {% include 'metods.html' %}
+              {% include 'investing.html' %}
+              {% include 'ahorro.html' %}
+              {% include 'aliado.html' %}
+              {% include 'metas.html' %}
+              {% include 'testimonial.html' %}
+              {% include 'companies.html' %}
+              {% include 'contact.html' %}
               
 
 {% comment %}

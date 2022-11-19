@@ -1,0 +1,60 @@
+{% load static %}
+<!-- ================ INVESTING END ================ -->
+              <section class="section-investing">
+                <div class="container">
+                    <div class="grid grid-cols-2 gap-8 py-8 px-6 md:grid-cols-2">
+                        
+                        <div class="flex justify-initial">
+                            <div class="flex flex-col m-auto w-3/4 text-color-blue">
+                                <p class="text-xl font-medium pb-4 ">
+                                    Las inversiones realizadas en los Planes Finniu van directamente a impulsar la producción y comercialización de productos agrícolas
+                                </p>
+                                <p class="text-base">
+                                    Productos agrícolas: Banano, Mango, Arroz, Arándanos, Cañamo, Palto, Pitahaya y más.
+                                </p>
+                            </div>
+                            
+                        </div>
+                        <div class="flex justify-end">
+                            <img src="{% static 'images/grow.png' %}" alt="" class="">
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <h2 class="text-white text-center title">
+                        Crece y domina tu dinero   
+                    </h2>
+                    <h2 class="text-white text-center title">
+                        desde ahora
+                    </h2>
+                    <div class="grid grid-cols-2 gap-8 py-8 px-6 md:grid-cols-2">
+                        <div class="container-selects">
+
+                            <label for="large" class="block text-white mb-2 text-base font-medium  dark:text-white pt-4">Monto Inicial</label>
+                            <input type="number" id="mount" class="bg-piel border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="s/." pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required="">
+                            <label for="large" class="block text-white mb-2 text-base font-medium  dark:text-white pt-4">Plan de inversión</label>
+                            <select id="large" class="bg-piel block w-full px-4 py-3 text-base  border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="US">Plan1</option>
+                            <option value="CA">Canada</option>
+                            <option value="FR">France</option>
+                            <option value="DE">Germany</option>
+                            </select>
+                            <label for="large" class="block mb-2 text-white text-base font-medium  dark:text-white pt-4">Plazo de inversión</label>
+                            <select id="large" class="bg-piel block w-full px-4 py-3 text-base  border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="3">3 meses</option>
+                            <option value="6">6 meses</option>
+                            <option value="12">12 meses</option>
+                            </select>
+                            <button type="button" class="mt-4   button-celeste hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Calcular</button>
+                        </div>
+                        <div>
+                            <img src="{% static 'images/grafico.png' %}" alt="" class="">
+                            <p class="text-white pt-2 text-xs">*Recuerda que tu rentabilidad esta asociada al plan de origen y el monto de inversión</p>
+                            <p class="text-white pt-2 text-xs">*Recuerda que por obligación de la  Sunat debes declarar el 5% de los intereses generados</p>
+                            <p class="text-white pt-2 text-xs">*Si tienes un monto de inversión mas de S/100,000, escribenos a nuestros canales de atención </p>
+                        </div>
+                    </div>
+                </div>
+              </section>
+
+              <!-- ================ SERVICES END ================ -->
