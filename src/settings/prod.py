@@ -12,7 +12,7 @@ PREPEND_WWW = False
 
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
 MEDIA_URL = os.environ.setdefault("MEDIA_URL", "/media/")
-ALLOWED_HOSTS = [localhost 127.0.0.1 [::1]]
+ALLOWED_HOSTS = ['*']
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 STATIC_URL = os.environ.setdefault("STATIC_URL", "/static/")
 
