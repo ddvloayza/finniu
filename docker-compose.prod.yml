@@ -14,7 +14,7 @@ services:
     image: nginx:1.15
     container_name: nginx01
     ports:
-      - "7000:80"
+      - "80:80"
     volumes:
       - ./webapp/nginx:/etc/nginx/conf.d
       - static:/www/static
@@ -29,7 +29,7 @@ services:
         - DJANGO_ENV=production
     env_file:
       - .env
-    command: sh -c "gunicorn --env DJANGO_SETTINGS_MODULE=src.settings.prod src.wsgi -b 0.0.0.0:8000 && python manage.py collectstatic --noinput"
+    command: sh -c "gunicorn --env DJANGO_SETTINGS_MODULE=src.settings.prod src.wsgi -b 0.0.0.0:8080 && python manage.py collectstatic --noinput"
     depends_on:
       - db
     volumes:
