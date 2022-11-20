@@ -17,9 +17,8 @@ services:
       - "80:80"
     volumes:
       - ./webapp/nginx:/etc/nginx/conf.d
-      - ./static:/static
-      - ./media:/media
-
+      - static:/www/static
+      - media:/www/media
     depends_on:
       - web
   web:
