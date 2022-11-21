@@ -86,8 +86,7 @@ section#home{
     height: 150px;
 }
 .card-label {
-    width: 50%;
-    height: 130px;
+    width: 85%;
     margin: auto;
     background-color: #A2E6FA;
     border-radius: 25px;
@@ -196,7 +195,6 @@ section.back-gradient3{
     border: 3px solid;
     align-self: center;
     padding: 20px;
-    justify-self: left;
     margin-left: 20px;
     border-color: #9381FF;
 }
