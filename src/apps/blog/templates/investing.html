@@ -31,24 +31,21 @@
                         <div class="container-selects">
 
                             <label for="large" class="block text-white mb-2 text-base font-medium  dark:text-white pt-4">Monto Inicial</label>
-                            <input type="number" id="mount" class="bg-piel border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="s/." pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required="">
-                            <label for="large" class="block text-white mb-2 text-base font-medium  dark:text-white pt-4">Plan de inversión</label>
-                            <select id="large" class="bg-piel block w-full px-4 py-3 text-base  border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="US">Plan1</option>
-                            <option value="CA">Canada</option>
-                            <option value="FR">France</option>
-                            <option value="DE">Germany</option>
-                            </select>
+                            <input type="number" id="mount" class="bg-piel border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                            placeholder="s/." pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" maxlength="5" required=""
+                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                             <label for="large" class="block mb-2 text-white text-base font-medium  dark:text-white pt-4">Plazo de inversión</label>
-                            <select id="large" class="bg-piel block w-full px-4 py-3 text-base  border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="3">3 meses</option>
-                            <option value="6">6 meses</option>
-                            <option value="12">12 meses</option>
+                            <select id="months" class="bg-piel block w-full px-4 py-3 text-base  border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="0">3 meses</option>
+                            <option value="1">6 meses</option>
+                            <option value="2">12 meses</option>
                             </select>
-                            <button type="button" class="mt-4   button-celeste hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Calcular</button>
+                            <button type="button" class="mt-4 button-celeste hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onclick="initDataChart(this)">Calcular</button>
                         </div>
                         <div>
-                            <img src="{% static 'images/grafico.png' %}" alt="" class="">
+                            <div id="chart-canvas">
+                            </div>
+                            <p class="text-white pt-2 text-2xl font-bold text-center" id="rendimiento"></p>
                             <p class="text-white pt-2 text-xs">*Recuerda que tu rentabilidad esta asociada al plan de origen y el monto de inversión</p>
                             <p class="text-white pt-2 text-xs">*Recuerda que por obligación de la  Sunat debes declarar el 5% de los intereses generados</p>
                             <p class="text-white pt-2 text-xs">*Si tienes un monto de inversión mas de S/100,000, escribenos a nuestros canales de atención </p>
@@ -56,5 +53,129 @@
                     </div>
                 </div>
               </section>
+              <script>
+                    
+                    function defaultChart(params) {
+                        document.getElementById("chart-canvas").innerHTML = ''
+                        document.getElementById("chart-canvas").innerHTML = '<canvas id="myChart" style="width:100%"></canvas>'
+                        Chart.defaults.global.defaultFontColor = 'White';
+                        new Chart("myChart", {
+                        type: "line",
+                        data: {
+                            labels: [0,'3 meses','6 meses','12 meses'],
+                            datasets: [{
+                            fill: true,
+                            lineTension: 0,
+                            backgroundColor: "rgba(162,230,250,1)",
+                            borderColor: "rgba(0,0,255,0.1)",
+                            data: [0, 1000, 10000, 10000]
+                            }]
+                        },
+                        options: {
+                            legend: false
+                        }
+                        });
+                    }
+                    defaultChart()
 
+
+                function calculateProfit(mount_value, months_value, months_text) {
+                    let plans_origen_values = [3,6,12]
+                    let plans_stable_values = [4,7,14]
+                    let plans_responsible_values = [4,8,16]
+                    let plans_grow_values = [5,10,20]
+
+                    if (mount_value >= 500 && mount_value <= 999) {
+                        var result0 = (mount_value * (plans_origen_values[0]/100)) + mount_value
+                        var result1 = (mount_value * (plans_origen_values[1]/100)) + mount_value
+                        var result2 = (mount_value * (plans_origen_values[2]/100)) + mount_value
+                        var plan_percent = [plans_origen_values[months_value], "Plan Origen", months_text, months_value]
+                        var result = [result0, result1, result2];
+                        console.log("RESULT1", parseInt(months_value))
+                        var result_profit = result.slice(0, parseInt(months_value)+1)
+       
+                    }
+                    else if (mount.value >= 1000 && mount.value <= 4999) {
+                        var result0 = (mount_value * (plans_stable_values[0]/100)) + mount_value
+                        var result1 = (mount_value * (plans_stable_values[1]/100)) + mount_value
+                        var result2 = (mount_value * (plans_stable_values[2]/100)) + mount_value
+                        var plan_percent = [plans_stable_values[months_value], "Plan Estable", months_text, months_value]
+                        var result = [result0, result1, result2];
+                        console.log("RESULT1", parseInt(months_value))
+                        var result_profit = result.slice(0, parseInt(months_value)+1)
+         
+                    }
+                    else if (mount.value >= 5000 && mount.value <= 9999) {
+                        var result0 = (mount_value * (plans_responsible_values[0]/100)) + mount_value
+                        var result1 = (mount_value * (plans_responsible_values[1]/100)) + mount_value
+                        var result2 = (mount_value * (plans_responsible_values[2]/100)) + mount_value
+                        var plan_percent = [plans_responsible_values[months_value], "Plan Responsable", months_text, months_value]
+                        var result = [result0, result1, result2];
+                        console.log("RESULT1", parseInt(months_value))
+                        var result_profit = result.slice(0, parseInt(months_value)+1)
+
+
+                    }
+                    else if (mount.value >= 10000 && mount.value <= 99999) {
+                        var result0 = (mount_value * (plans_grow_values[0]/100)) + mount_value
+                        var result1 = (mount_value * (plans_grow_values[1]/100)) + mount_value
+                        var result2 = (mount_value * (plans_grow_values[2]/100)) + mount_value
+                        var plan_percent = [plans_grow_values[months_value], "Plan Crecimiento", months_text, months_value]
+                        var result = [result0, result1, result2];
+                        console.log("RESULT1", parseInt(months_value))
+                        var result_profit = result.slice(0, parseInt(months_value)+1)
+
+                    }
+                    return [result_profit, plan_percent]
+                }
+                function initDataChart(param) {
+                    let mount = document.getElementById("mount");
+                    let mount_value = parseInt(mount.value);
+                    let months = document.getElementById("months");
+                    let months_value = parseInt(months.value);
+                    let months_text = months.options[months.selectedIndex].text;
+                    let range_mount_origen = [500-999]
+                    let range_mount_stable = [1000-4999]
+                    let range_mount_responsible = [5000-9999]
+                    let range_mount_grow = [10000-99999]
+
+                    let profit_data = calculateProfit(mount_value, months_value, months_text)
+                    document.getElementById("chart-canvas").innerHTML = ''
+                    document.getElementById("chart-canvas").innerHTML = '<canvas id="myChart" style="width:100%"></canvas>'
+
+                    console.log("ENTRO", months_text)
+                    Chart.defaults.global.defaultFontColor = 'White';
+                    var xValues = [0,'3 meses','6 meses','12 meses'];
+                    var yValues = [0, profit_data[0][0], profit_data[0][1], profit_data[0][2]];
+                    
+                    new Chart("myChart", {
+                    type: "line",
+                    data: {
+                        labels: xValues,
+                        datasets: [{
+                        label: "Tu Dinero",
+                        fill: true,
+                        lineTension: 0,
+                        backgroundColor: "rgba(162,230,250,1)",
+                        borderColor: "rgba(0,0,255,0.1)",
+                        data: yValues
+                        }]
+                    },
+                    options: {
+                            title: {
+                            display: true,
+                            position: 'top',
+                            text: 'Tu plan de inversión recomendado sería : '+profit_data[1][1]
+                            },
+                            legend: {
+                                position: 'bottom',
+                            },
+                    }
+                    });
+                    const final_profit = profit_data[1][3]
+                    console.log("final_profit", typeof(final_profit))
+                    document.getElementById('rendimiento').innerHTML = "En "+profit_data[1][2]+" tendrías S/"+ profit_data[0][final_profit]
+                }
+                
+                </script>
               <!-- ================ SERVICES END ================ -->

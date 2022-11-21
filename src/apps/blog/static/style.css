@@ -164,7 +164,7 @@ section#home{
   }
 
 .text-color-blue {
-    color: #0D3A5C;
+    color: #0D3A5C !important;
 }
 .text-color-lila {
     color: #CDB6FF;
@@ -188,7 +188,7 @@ section.back-gradient3{
     background: radial-gradient(96.02% 149.1% at 7.43% 3.98%, #BEF1FF 0%, rgba(190, 241, 255, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
 }
 .background-celeste {
-    background-color: #A2E6FA;
+    background-color: #A2E6FA !important;
 }
 .background-lila {
     background-color: #CDB6FF;
@@ -242,4 +242,22 @@ section.back-gradient3{
   }
 .shows{
     display: block !important;
+}
+.button-signup {
+    border: 2px solid #A2E6FA;
+    border-radius: 30px;
+    max-width: 30%;
+    padding: 10px;
+    text-align: center;
+    margin-top: 5%;
+    font-size: 20px;
+    cursor: pointer;
+}
+.button-signup:hover{
+    background-color: #FFFFFF;
+    color: #0D3A5C;
+}
+.button-sticky{
+    background-color: #0D3A5C !important;
+    color: white !important;
 }
