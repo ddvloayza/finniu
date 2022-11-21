@@ -2,7 +2,7 @@
 <!-- ================ INVESTING END ================ -->
               <section class="section-investing">
                 <div class="container">
-                    <div class="grid grid-cols-2 gap-8 py-8 px-6 md:grid-cols-2">
+                    <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-8 py-8 px-6 ">
                         
                         <div class="flex justify-initial">
                             <div class="flex flex-col m-auto w-3/4 text-color-blue">
@@ -27,7 +27,7 @@
                     <h2 class="text-white text-center title">
                         desde ahora
                     </h2>
-                    <div class="grid grid-cols-2 gap-8 py-8 px-6 md:grid-cols-2">
+                    <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-8 py-8 px-6">
                         <div class="container-selects">
 
                             <label for="large" class="block text-white mb-2 text-base font-medium  dark:text-white pt-4">Monto Inicial</label>
@@ -57,7 +57,7 @@
                     
                     function defaultChart(params) {
                         document.getElementById("chart-canvas").innerHTML = ''
-                        document.getElementById("chart-canvas").innerHTML = '<canvas id="myChart" style="width:100%"></canvas>'
+                        document.getElementById("chart-canvas").innerHTML = '<canvas id="myChart" style=""></canvas>'
                         Chart.defaults.global.defaultFontColor = 'White';
                         new Chart("myChart", {
                         type: "line",
