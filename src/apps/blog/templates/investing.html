@@ -21,10 +21,10 @@
                     </div>
                 </div>
                 <div class="container">
-                    <h2 class="text-white text-center title">
+                    <h2 class="text-white text-center md:text-[48px] md:text-start min-[320px]:text-[28px] min-[320px]:text-center font-black">
                         Crece y domina tu dinero   
                     </h2>
-                    <h2 class="text-white text-center title">
+                    <h2 class="text-white text-center md:text-[48px] md:text-start min-[320px]:text-[28px] min-[320px]:text-center font-black">
                         desde ahora
                     </h2>
                     <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-8 py-8 px-6">
@@ -141,7 +141,7 @@
 
                     let profit_data = calculateProfit(mount_value, months_value, months_text)
                     document.getElementById("chart-canvas").innerHTML = ''
-                    document.getElementById("chart-canvas").innerHTML = '<canvas id="myChart" style="width:100%"></canvas>'
+                    document.getElementById("chart-canvas").innerHTML = '<canvas id="myChart" style=""></canvas>'
 
                     console.log("ENTRO", months_text)
                     Chart.defaults.global.defaultFontColor = 'White';
