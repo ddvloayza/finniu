@@ -1,7 +1,7 @@
 {% load static %}
 
   <!-- ================= HEADER ================= -->
-<nav class="px-2 sm:px-4 py-2.5 fixed w-full z-20 top-0 left-0 border-gray-200 nav-sticky">
+<nav class="px-2 sm:px-4 py-2.5 fixed w-full z-50 top-0 left-0 border-gray-200 nav-sticky">
     <div class="container flex flex-wrap justify-between items-center mx-auto">
     <a href="" class="flex items-center">
         <img src="{% static 'images/LogoCrema.png' %}" class="mr-3 h-4-5 logo1" alt="Finniu Logo">
@@ -18,11 +18,11 @@
       <div class="hidden  md:flex md:justify-end md:flex-auto  text-white navbar-default" id="navbar-sticky">
         <ul class="flex flex-col p-4 mt-4 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 ">
           <li>
-            <a href="#" class="block py-2 pr-4 pl-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">Home</a>
+            <a href="{% url 'blog:home' %}" class="block py-2 pr-4 pl-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">Home</a>
           </li>
 
           <li>
-            <a href="#" class="block py-2 pr-4 pl-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">Servicios</a>
+            <a href="{% url 'blog:servicios' %}" class="block py-2 pr-4 pl-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 ">Servicios</a>
           </li>
 
           <li>

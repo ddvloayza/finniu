@@ -36,6 +36,13 @@
     background-size: 100% 100%;
     
 }
+.section-bg-preguntas{
+    background-image: url(images/preguntas-bg.png);
+    background-repeat: no-repeat;
+    background-position-y: inherit;
+    background-size: 100% 100%;
+    
+}
 
 body {
     line-height: 2;
@@ -190,6 +197,9 @@ section.back-gradient3{
 .background-morado {
     background-color: #9381FF;
 }
+.background-azul-oscuro{
+    background-color: #0D3A5C !important;
+}
 .border-contact {
     border-radius: 30px;
     border: 3px solid;
@@ -255,4 +265,9 @@ section.back-gradient3{
 }
 .word-wrap-anywhere{
     word-wrap: anywhere;
+}
+.card-team {
+    background-color: antiquewhite;
+    border-radius: 50px;
+    width: 80%;
 }

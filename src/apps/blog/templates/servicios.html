@@ -1,0 +1,249 @@
+{% extends "web/base.html" %}
+{% load static %}
+{% block social_facebook %}
+  <meta property="og:url"           content="" />
+  <meta property="og:type"          content="article" />
+  <meta property="og:title"         content="" />
+  <meta property="og:description"   content="" />
+  <meta property="og:image"         content="" />
+  <meta property="og:image:width"   content="1920"/>
+  <meta property="og:image:height"   content="1079" />
+
+{% endblock social_facebook %}
+
+{% block css %}
+<style>
+
+
+</style>
+
+{% endblock css %}
+{% block content %}
+<!-- ================ INVESTING END ================ -->
+    <section class="first-fondo">
+        <div class="container py-32">
+            <h1 class="md:text-[48px] min-[320px]:text-[28px] font-black w-full text-center py-24 text-white">Conoce a nuestro equipo Finniu</h1>
+            <div id="default-carousel" class="relative" data-carousel="static">
+                <!-- Carousel wrapper -->
+                <div class="relative h-56 overflow-hidden rounded-lg md:h-96 ">
+                    <!-- Item 1 -->
+                    <div class="hidden duration-700 ease-in-out grid md:grid-cols-3 sm:grid-cols-1 gap-8 justify-items-center" data-carousel-item>
+                        <div class="grid card-team justify-items-center py-8">
+                            <img src="{% static 'images/team/team1.png' %}" class="" alt="...">
+                            <span class="text-2xl text-center font-bold">Diego Mallqui </span>
+                            <span class="text-xl text-center">CEO. de Finniu </span>
+                            <span class="text-xl text-center">“Lorem ipsum dolor sit amet, consectetur adipiscing elit. “</span>
+                            
+                        </div>
+                        <div class="grid card-team justify-items-center py-8">
+                            <img src="{% static 'images/team/team2.png' %}" class="" alt="...">
+                            <span class="text-2xl text-center font-bold">Renzo Cateriano </span>
+                            <span class="text-xl text-center">Gestión de proyectos </span>
+                            <span class="text-xl text-center">“Lorem ipsum dolor sit amet, consectetur adipiscing elit. “</span>
+                            
+                        </div>
+                        <div class="grid card-team justify-items-center py-8">
+                            <img src="{% static 'images/team/team3.png' %}" class="" alt="...">
+                            <span class="text-2xl text-center font-bold">Dennis del Carpio </span>
+                            <span class="text-xl text-center">Desarrollo de negocios</span>
+                            <span class="text-xl text-center">“Lorem ipsum dolor sit amet, consectetur adipiscing elit. “</span>
+                            
+                        </div>
+                        
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="hidden duration-700 ease-in-out grid md:grid-cols-3 sm:grid-cols-1 gap-8 justify-items-center" data-carousel-item>
+                        <div class="grid card-team justify-items-center py-8">
+                            <img src="{% static 'images/team/team4.png' %}" class="" alt="...">
+                            <span class="text-2xl text-center font-bold">Franco Cateriano</span>
+                            <span class="text-xl text-center">Marketing </span>
+                            <span class="text-xl text-center">“Lorem ipsum dolor sit amet, consectetur adipiscing elit. “</span>
+                            
+                        </div>
+                        <div class="grid card-team justify-items-center py-8">
+                            <img src="{% static 'images/team/team5.png' %}" class="" alt="...">
+                            <span class="text-2xl text-center font-bold">Geraldine De La Vega</span>
+                            <span class="text-xl text-center">UX-UI designer </span>
+                            <span class="text-xl text-center">“Lorem ipsum dolor sit amet, consectetur adipiscing elit. “</span>
+                            
+                        </div>
+                        <div class="grid card-team justify-items-center py-8">
+                            <img src="{% static 'images/team/team6.png' %}" class="" alt="...">
+                            <span class="text-2xl text-center font-bold">Diego Mallqui </span>
+                            <span class="text-xl text-center">CEO. de Finniu </span>
+                            <span class="text-xl text-center">“Lorem ipsum dolor sit amet, consectetur adipiscing elit. “</span>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+                <!-- Slider indicators -->
+                <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
+                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+                </div>
+                <!-- Slider controls -->
+                <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                        <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                        <span class="sr-only">Previous</span>
+                    </span>
+                </button>
+                <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                        <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        <span class="sr-only">Next</span>
+                    </span>
+                </button>
+            </div>
+
+        </div>
+    </section>
+<section>
+    <h1 class="md:text-[48px] min-[320px]:text-[28px] font-black w-full text-center py-24 text-color-blue">Nuestros servicios en Finniu</h1>
+    <div class="container grid md:grid-cols-2 sm:grid-cols-1 gap-8 py-8 px-6 justify-items-center">
+        <div class="flip">
+            <div class="flip-content">
+              <div class="flip-front background-azul-oscuro">
+                <div class="grid justify-items-center">
+                    <svg width="200" height="200" viewBox="0 0 154 95" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M154 15.8333C154 24.5417 147.7 31.6667 140 31.6667C138.74 31.6667 137.55 31.5083 136.43 31.1125L111.51 59.2167C111.86 60.4833 112 61.9083 112 63.3333C112 72.0417 105.7 79.1667 98 79.1667C90.3 79.1667 84 72.0417 84 63.3333C84 61.9083 84.14 60.4833 84.49 59.2167L66.64 39.0292C65.52 39.425 64.26 39.5833 63 39.5833C61.74 39.5833 60.48 39.425 59.36 39.0292L27.51 75.1292C27.86 76.3958 28 77.7417 28 79.1667C28 87.875 21.7 95 14 95C6.3 95 0 87.875 0 79.1667C0 70.4583 6.3 63.3333 14 63.3333C15.26 63.3333 16.45 63.4917 17.57 63.8875L49.49 27.8667C49.14 26.6 49 25.175 49 23.75C49 15.0417 55.3 7.91667 63 7.91667C70.7 7.91667 77 15.0417 77 23.75C77 25.175 76.86 26.6 76.51 27.8667L94.36 48.0542C95.48 47.6583 96.74 47.5 98 47.5C99.26 47.5 100.52 47.6583 101.64 48.0542L126.49 19.8708C126.14 18.6042 126 17.2583 126 15.8333C126 7.125 132.3 0 140 0C147.7 0 154 7.125 154 15.8333Z" fill="#A2E6FA"/>
+                    </svg>
+                </div>
+                
+                <h3 class="md:text-[28px] min-[320px]:text-[18px] text-center font-black text-white font-semibold py-4">Inversiones</h3>
+              </div>
+              <div class="flip-back background-celeste">
+                <ul class="p-back-text text-color-blue text-2xl list-disc">
+                    <li>Planes de inversión </li>
+                    <li>
+                        Hasta 20% anual 
+                    </li>
+                    <li>
+                        Aldeas infantiles
+                    </li>
+                </ul>
+                <p class="p-back-text text-white">
+                    
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="flip">
+            <div class="flip-content">
+              <div class="flip-front background-azul-oscuro">
+                <div class="grid justify-items-center">
+                    <svg width="200" height="200" viewBox="0 0 95 113" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M84.4444 11.3H62.3833C60.1667 4.746 54.3611 0 47.5 0C40.6389 0 34.8333 4.746 32.6167 11.3H10.5556C4.75 11.3 0 16.385 0 22.6V101.7C0 107.915 4.75 113 10.5556 113H84.4444C90.25 113 95 107.915 95 101.7V22.6C95 16.385 90.25 11.3 84.4444 11.3ZM47.5 9.8875C49.6639 9.8875 51.4583 11.8085 51.4583 14.125C51.4583 16.4415 49.6639 18.3625 47.5 18.3625C45.3361 18.3625 43.5417 16.4415 43.5417 14.125C43.5417 11.8085 45.3361 9.8875 47.5 9.8875ZM84.4444 101.7H10.5556V22.6H84.4444V101.7Z" fill="#0D3A5C"/>
+                        <path d="M84.4444 11.3H62.3833C60.1667 4.746 54.3611 0 47.5 0C40.6389 0 34.8333 4.746 32.6167 11.3H10.5556C4.75 11.3 0 16.385 0 22.6V101.7C0 107.915 4.75 113 10.5556 113H84.4444C90.25 113 95 107.915 95 101.7V22.6C95 16.385 90.25 11.3 84.4444 11.3ZM47.5 9.8875C49.6639 9.8875 51.4583 11.8085 51.4583 14.125C51.4583 16.4415 49.6639 18.3625 47.5 18.3625C45.3361 18.3625 43.5417 16.4415 43.5417 14.125C43.5417 11.8085 45.3361 9.8875 47.5 9.8875ZM84.4444 101.7H10.5556V22.6H84.4444V101.7Z" fill="#83CCE1"/>
+                        <path d="M84.4444 11.3H62.3833C60.1667 4.746 54.3611 0 47.5 0C40.6389 0 34.8333 4.746 32.6167 11.3H10.5556C4.75 11.3 0 16.385 0 22.6V101.7C0 107.915 4.75 113 10.5556 113H84.4444C90.25 113 95 107.915 95 101.7V22.6C95 16.385 90.25 11.3 84.4444 11.3ZM47.5 9.8875C49.6639 9.8875 51.4583 11.8085 51.4583 14.125C51.4583 16.4415 49.6639 18.3625 47.5 18.3625C45.3361 18.3625 43.5417 16.4415 43.5417 14.125C43.5417 11.8085 45.3361 9.8875 47.5 9.8875ZM84.4444 101.7H10.5556V22.6H84.4444V101.7Z" fill="#FFEEDD"/>
+                        <path d="M84.4444 11.3H62.3833C60.1667 4.746 54.3611 0 47.5 0C40.6389 0 34.8333 4.746 32.6167 11.3H10.5556C4.75 11.3 0 16.385 0 22.6V101.7C0 107.915 4.75 113 10.5556 113H84.4444C90.25 113 95 107.915 95 101.7V22.6C95 16.385 90.25 11.3 84.4444 11.3ZM47.5 9.8875C49.6639 9.8875 51.4583 11.8085 51.4583 14.125C51.4583 16.4415 49.6639 18.3625 47.5 18.3625C45.3361 18.3625 43.5417 16.4415 43.5417 14.125C43.5417 11.8085 45.3361 9.8875 47.5 9.8875ZM84.4444 101.7H10.5556V22.6H84.4444V101.7Z" fill="#A2E6FA"/>
+                        <path d="M62 57.0544L50.4554 45L18 78.8319V91H29.4356L62 57.0544Z" fill="#0D3A5C"/>
+                        <path d="M62 57.0544L50.4554 45L18 78.8319V91H29.4356L62 57.0544Z" fill="#83CCE1"/>
+                        <path d="M62 57.0544L50.4554 45L18 78.8319V91H29.4356L62 57.0544Z" fill="#FFEEDD"/>
+                        <path d="M62 57.0544L50.4554 45L18 78.8319V91H29.4356L62 57.0544Z" fill="#A2E6FA"/>
+                        <path d="M72.1892 47.3153C73.2703 46.0541 73.2703 44.0991 72.1892 42.8378L64.5676 33.9459C63.4865 32.6847 61.8108 32.6847 60.7297 33.9459L55 40.6306L66.4595 54L72.1892 47.3153Z" fill="#0D3A5C"/>
+                        <path d="M72.1892 47.3153C73.2703 46.0541 73.2703 44.0991 72.1892 42.8378L64.5676 33.9459C63.4865 32.6847 61.8108 32.6847 60.7297 33.9459L55 40.6306L66.4595 54L72.1892 47.3153Z" fill="#83CCE1"/>
+                        <path d="M72.1892 47.3153C73.2703 46.0541 73.2703 44.0991 72.1892 42.8378L64.5676 33.9459C63.4865 32.6847 61.8108 32.6847 60.7297 33.9459L55 40.6306L66.4595 54L72.1892 47.3153Z" fill="#FFEEDD"/>
+                        <path d="M72.1892 47.3153C73.2703 46.0541 73.2703 44.0991 72.1892 42.8378L64.5676 33.9459C63.4865 32.6847 61.8108 32.6847 60.7297 33.9459L55 40.6306L66.4595 54L72.1892 47.3153Z" fill="#A2E6FA"/>
+                    </svg>
+                </div>
+                
+                <h3 class="md:text-[28px] min-[320px]:text-[18px] text-center font-black text-white font-semibold py-4">Administración  </h3>
+              </div>
+              <div class="flip-back background-celeste">
+                <ul class="p-back-text text-color-blue text-2xl list-disc">
+                    <li>Presupuesto </li>
+                    <li>
+                        Seguimiento
+                    </li>
+                    <li>
+                        Reportes semanales
+                    </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+    </div>
+</section>
+{% include 'metas.html' %}
+<section class="section-bg-preguntas">
+    <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-8 py-8 px-6">
+        <div class="flex justify-end items-center">
+            <img src="{% static 'images/preguntas.png' %}" class="" alt="...">
+        </div>
+        <div class="flex justify-initial items-center">
+            <div id="accordion-collapse" data-accordion="collapse">
+                <h2 id="accordion-collapse-heading-1">
+                <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-color-blue background-celeste rounded-t-xl" data-accordion-target="#accordion-collapse-body-1" aria-expanded="true" aria-controls="accordion-collapse-body-1">
+                    <span>¿Cuál es el costo para usar la aplicación?</span>
+                    <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+                </h2>
+                <div id="accordion-collapse-body-1" class="hidden" aria-labelledby="accordion-collapse-heading-1">
+                <div class="p-5 font-light border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+                    <p class="mb-2 text-gray-500 dark:text-gray-400">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                        It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    </p>
+                </div>
+                </div>
+                <h2 id="accordion-collapse-heading-2">
+                <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-color-blue background-celeste" data-accordion-target="#accordion-collapse-body-2" aria-expanded="false" aria-controls="accordion-collapse-body-2">
+                    <span>¿Cuales son los requisitos para ser cliente de Finniu ?</span>
+                    <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+                </h2>
+                <div id="accordion-collapse-body-2" class="hidden" aria-labelledby="accordion-collapse-heading-2">
+                <div class="p-5 font-light border border-b-0 border-gray-200 dark:border-gray-700">
+                    <p class="mb-2 text-gray-500 dark:text-gray-400">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                        It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    </p>                </div>
+                </div>
+                <h2 id="accordion-collapse-heading-3">
+                <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-color-blue background-celeste" data-accordion-target="#accordion-collapse-body-3" aria-expanded="false" aria-controls="accordion-collapse-body-3">
+                    <span>¿Cuánto es el monto mínimo para poder invertir?</span>
+                    <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+                </h2>
+                <div id="accordion-collapse-body-3" class="hidden" aria-labelledby="accordion-collapse-heading-3">
+                <div class="p-5 font-light border border-t-0 border-gray-200 dark:border-gray-700">
+                    <p class="mb-2 text-gray-500 dark:text-gray-400">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                        It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    </p>
+                </div>
+                </div>
+                <h2 id="accordion-collapse-heading-3">
+                    <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-color-blue background-celeste " data-accordion-target="#accordion-collapse-body-3" aria-expanded="false" aria-controls="accordion-collapse-body-3">
+                        <span>¿Para invertir y retirar mi dinero tengo que pagar alguna comisión?</span>
+                        <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </button>
+                    </h2>
+                    <div id="accordion-collapse-body-3" class="hidden" aria-labelledby="accordion-collapse-heading-3">
+                    <div class="p-5 font-light border border-t-0 border-gray-200 dark:border-gray-700">
+                        <p class="mb-2 text-gray-500 dark:text-gray-400">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                            It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                        </p>
+                    </div>
+                    </div>
+            </div>
+  
+        </div>
+    </div>
+</section>
+{% include 'contact.html' %}
+    {% endblock content %}
+    {% block js %}
+    
+    {% endblock js %}
