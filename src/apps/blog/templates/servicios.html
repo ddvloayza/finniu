@@ -22,10 +22,10 @@
 <!-- ================ INVESTING END ================ -->
     <section class="first-fondo">
         <div class="container py-32">
-            <h1 class="md:text-[48px] min-[320px]:text-[28px] font-black w-full text-center py-24 text-white">Conoce a nuestro equipo Finniu</h1>
-            <div id="default-carousel" class="relative" data-carousel="static">
+            <h1 class="md:text-[48px] min-[320px]:text-[28px] font-black w-full text-center md:py-24 min-[320px]:py-8 text-white">Conoce a nuestro equipo Finniu</h1>
+            <div id="default-carousel " class="relative min-[320px]:hidden md:block" data-carousel="static">
                 <!-- Carousel wrapper -->
-                <div class="relative h-56 overflow-hidden rounded-lg md:h-96 ">
+                <div class="relative h-[22rem] overflow-hidden rounded-lg md:h-96 ">
                     <!-- Item 1 -->
                     <div class="hidden duration-700 ease-in-out grid md:grid-cols-3 sm:grid-cols-1 gap-8 justify-items-center" data-carousel-item>
                         <div class="grid card-team justify-items-center py-8">
@@ -97,10 +97,96 @@
                 </button>
             </div>
 
+            <div id="default-carousel " class="relative min-[320px]:block md:hidden" data-carousel="static">
+                <!-- Carousel wrapper -->
+                <div class="relative h-[22rem] overflow-hidden rounded-lg md:h-96 ">
+                    <!-- Item 1 -->
+                    <div class="hidden duration-700 ease-in-out grid md:grid-cols-3 sm:grid-cols-1 gap-8 justify-items-center" data-carousel-item>
+                        <div class="grid card-team justify-items-center py-8">
+                            <img src="{% static 'images/team/team1.png' %}" class="" alt="...">
+                            <span class="text-2xl text-center font-bold">Diego Mallqui </span>
+                            <span class="text-xl text-center">CEO. de Finniu </span>
+                            <span class="text-xl text-center">“Lorem ipsum dolor sit amet, consectetur adipiscing elit. “</span>
+                            
+                        </div>
+                    </div>
+                     <!-- Item 2 -->
+                    <div class="hidden duration-700 ease-in-out grid md:grid-cols-3 sm:grid-cols-1 gap-8 justify-items-center" data-carousel-item>
+                        <div class="grid card-team justify-items-center py-8">
+                            <img src="{% static 'images/team/team2.png' %}" class="" alt="...">
+                            <span class="text-2xl text-center font-bold">Renzo Cateriano </span>
+                            <span class="text-xl text-center">Gestión de proyectos </span>
+                            <span class="text-xl text-center">“Lorem ipsum dolor sit amet, consectetur adipiscing elit. “</span>
+                            
+                        </div>
+                    </div>
+                     <!-- Item 3 -->
+                    <div class="hidden duration-700 ease-in-out grid md:grid-cols-3 sm:grid-cols-1 gap-8 justify-items-center" data-carousel-item>
+                        <div class="grid card-team justify-items-center py-8">
+                            <img src="{% static 'images/team/team3.png' %}" class="" alt="...">
+                            <span class="text-2xl text-center font-bold">Dennis del Carpio </span>
+                            <span class="text-xl text-center">Desarrollo de negocios</span>
+                            <span class="text-xl text-center">“Lorem ipsum dolor sit amet, consectetur adipiscing elit. “</span>
+                            
+                        </div>
+                        
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="hidden duration-700 ease-in-out grid md:grid-cols-3 sm:grid-cols-1 gap-8 justify-items-center" data-carousel-item>
+                        <div class="grid card-team justify-items-center py-8">
+                            <img src="{% static 'images/team/team4.png' %}" class="" alt="...">
+                            <span class="text-2xl text-center font-bold">Franco Cateriano</span>
+                            <span class="text-xl text-center">Marketing </span>
+                            <span class="text-xl text-center">“Lorem ipsum dolor sit amet, consectetur adipiscing elit. “</span>
+                            
+                        </div>
+                    </div>
+                    <div class="hidden duration-700 ease-in-out grid md:grid-cols-3 sm:grid-cols-1 gap-8 justify-items-center" data-carousel-item>
+                        <div class="grid card-team justify-items-center py-8">
+                            <img src="{% static 'images/team/team5.png' %}" class="" alt="...">
+                            <span class="text-2xl text-center font-bold">Geraldine De La Vega</span>
+                            <span class="text-xl text-center">UX-UI designer </span>
+                            <span class="text-xl text-center">“Lorem ipsum dolor sit amet, consectetur adipiscing elit. “</span>
+                            
+                        </div>
+                    </div>
+                    <div class="hidden duration-700 ease-in-out grid md:grid-cols-3 sm:grid-cols-1 gap-8 justify-items-center" data-carousel-item>
+                        <div class="grid card-team justify-items-center py-8">
+                            <img src="{% static 'images/team/team6.png' %}" class="" alt="...">
+                            <span class="text-2xl text-center font-bold">Diego Mallqui </span>
+                            <span class="text-xl text-center">CEO. de Finniu </span>
+                            <span class="text-xl text-center">“Lorem ipsum dolor sit amet, consectetur adipiscing elit. “</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slider indicators -->
+                <div class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
+                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
+                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
+                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 6" data-carousel-slide-to="5"></button>
+                </div>
+                <!-- Slider controls -->
+                <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                        <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                        <span class="sr-only">Previous</span>
+                    </span>
+                </button>
+                <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                        <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        <span class="sr-only">Next</span>
+                    </span>
+                </button>
+            </div>
+
         </div>
     </section>
 <section>
-    <h1 class="md:text-[48px] min-[320px]:text-[28px] font-black w-full text-center py-24 text-color-blue">Nuestros servicios en Finniu</h1>
+    <h1 class="md:text-[48px] min-[320px]:text-[28px] font-black w-full text-center md:py-24 min-[320px]:py-8 text-color-blue">Nuestros servicios en Finniu</h1>
     <div class="container grid md:grid-cols-2 sm:grid-cols-1 gap-8 py-8 px-6 justify-items-center">
         <div class="flip">
             <div class="flip-content">
@@ -169,7 +255,7 @@
 {% include 'metas.html' %}
 <section class="section-bg-preguntas">
     <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-8 py-8 px-6">
-        <div class="flex justify-end items-center">
+        <div class="flex md:justify-end min-[320px]:justify-center items-center min-[320px]:w-1/2">
             <img src="{% static 'images/preguntas.png' %}" class="" alt="...">
         </div>
         <div class="flex justify-initial items-center">
@@ -188,6 +274,12 @@
                         It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
                         It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                     </p>
+                    <button class="bg-[#A2E6FA] p-4 rounded-3xl text-color-blue font-bold hover:bg-white ">
+                        <a href="https://diegomallqui.notion.site/FAQ-Finniu-d38dc61d165149c4bb861e8e348b8dd4" target="_blank">
+                            leer más 
+                        </a>
+                        
+                    </button>
                 </div>
                 </div>
                 <h2 id="accordion-collapse-heading-2">
@@ -197,13 +289,20 @@
                 </button>
                 </h2>
                 <div id="accordion-collapse-body-2" class="hidden" aria-labelledby="accordion-collapse-heading-2">
-                <div class="p-5 font-light border border-b-0 border-gray-200 dark:border-gray-700">
-                    <p class="mb-2 text-gray-500 dark:text-gray-400">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                        It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                    </p>                </div>
+                    <div class="p-5 font-light border border-b-0 border-gray-200 dark:border-gray-700">
+                        <p class="mb-2 text-gray-500 dark:text-gray-400">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                            It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                        </p>
+                        <button class="bg-[#A2E6FA] p-4 rounded-3xl text-color-blue font-bold hover:bg-white ">
+                            <a href="https://diegomallqui.notion.site/FAQ-Finniu-d38dc61d165149c4bb861e8e348b8dd4" target="_blank">
+                                leer más 
+                            </a>
+                            
+                        </button>
+                    </div>
                 </div>
                 <h2 id="accordion-collapse-heading-3">
                 <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-color-blue background-celeste" data-accordion-target="#accordion-collapse-body-3" aria-expanded="false" aria-controls="accordion-collapse-body-3">
@@ -219,15 +318,21 @@
                         It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
                         It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                     </p>
+                    <button class="bg-[#A2E6FA] p-4 rounded-3xl text-color-blue font-bold hover:bg-white ">
+                        <a href="https://diegomallqui.notion.site/FAQ-Finniu-d38dc61d165149c4bb861e8e348b8dd4" target="_blank">
+                            leer más 
+                        </a>
+                        
+                    </button>
                 </div>
                 </div>
                 <h2 id="accordion-collapse-heading-3">
-                    <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-color-blue background-celeste " data-accordion-target="#accordion-collapse-body-3" aria-expanded="false" aria-controls="accordion-collapse-body-3">
+                    <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-color-blue background-celeste " data-accordion-target="#accordion-collapse-body-4" aria-expanded="false" aria-controls="accordion-collapse-body-4">
                         <span>¿Para invertir y retirar mi dinero tengo que pagar alguna comisión?</span>
                         <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     </button>
                     </h2>
-                    <div id="accordion-collapse-body-3" class="hidden" aria-labelledby="accordion-collapse-heading-3">
+                    <div id="accordion-collapse-body-4" class="hidden" aria-labelledby="accordion-collapse-heading-4">
                     <div class="p-5 font-light border border-t-0 border-gray-200 dark:border-gray-700">
                         <p class="mb-2 text-gray-500 dark:text-gray-400">
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry.
@@ -235,6 +340,12 @@
                             It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
                             It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                         </p>
+                        <button class="bg-[#A2E6FA] p-4 rounded-3xl text-color-blue font-bold hover:bg-white ">
+                            <a href="https://diegomallqui.notion.site/FAQ-Finniu-d38dc61d165149c4bb861e8e348b8dd4" target="_blank">
+                                leer más 
+                            </a>
+                            
+                        </button>
                     </div>
                     </div>
             </div>
