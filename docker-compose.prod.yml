@@ -74,3 +74,6 @@ volumes:
     external: true
   media:
   static:
+  certs:
+  vhost:
+  html:
