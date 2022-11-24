@@ -75,5 +75,5 @@ volumes:
   media:
   static:
   certs:
-  vhost:
+  vhostd:
   html:
