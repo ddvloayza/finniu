@@ -38,8 +38,8 @@ services:
   nginx:
     image: nginx:1.15
     container_name: nginx01
-    ports:
-      - "80:80"
+    expose:
+      - "80"
     volumes:
       - ./webapp/nginx:/etc/nginx/conf.d
       - static:/www/static
